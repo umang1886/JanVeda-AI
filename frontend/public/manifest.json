@@ -1,0 +1,16 @@
+{
+  "name": "JanVeda AI — Know Your Vote",
+  "short_name": "JanVeda",
+  "description": "Interactive Election Education Platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFAF8",
+  "theme_color": "#FF6B35",
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
