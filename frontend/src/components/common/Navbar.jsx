@@ -1,20 +1,22 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 
-const NAV_LINKS = [
-  { to: '/timeline', label: 'Timeline', icon: '📅' },
-  { to: '/booth-finder', label: 'Find Booth', icon: '📍' },
-  { to: '/first-time-voter', label: 'First Timer', icon: '🗳️' },
-  { to: '/simulator', label: 'EVM Sim', icon: '🖧' },
-  { to: '/quiz', label: 'Quiz', icon: '🏆' },
-  { to: '/glossary', label: 'Glossary', icon: '📖' },
-  { to: '/chatbot', label: 'AI Help', icon: '💬' },
+const getNavLinks = (t) => [
+  { to: '/timeline', label: t('nav_timeline') || 'Timeline', icon: '📅' },
+  { to: '/booth-finder', label: t('nav_booth') || 'Find Booth', icon: '📍' },
+  { to: '/first-time-voter', label: t('nav_first_time') || 'First Timer', icon: '🗳️' },
+  { to: '/simulator', label: t('nav_simulator') || 'EVM Sim', icon: '🖧' },
+  { to: '/quiz', label: t('nav_quiz') || 'Quiz', icon: '🏆' },
+  { to: '/glossary', label: t('nav_glossary') || 'Glossary', icon: '📖' },
+  { to: '/chatbot', label: t('nav_chatbot') || 'AI Help', icon: '💬' },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+  const { t, i18n } = useTranslation();
 
   // Close mobile menu on route change
   React.useEffect(() => setOpen(false), [location.pathname]);
@@ -81,7 +83,7 @@ export default function Navbar() {
           }}
           className="desktop-nav"
         >
-          {NAV_LINKS.map(link => (
+          {getNavLinks(t).map(link => (
             <li key={link.to}>
               <NavLink
                 to={link.to}
@@ -106,6 +108,25 @@ export default function Navbar() {
               </NavLink>
             </li>
           ))}
+          <li style={{ marginLeft: "1rem" }}>
+            <select
+              style={{
+                fontFamily: "var(--font-heading)",
+                padding: "0.25rem",
+                borderRadius: "var(--radius-sm)",
+                border: "1px solid var(--border)",
+                background: "var(--bg)",
+                cursor: "pointer",
+              }}
+              onChange={(e) => {
+                i18n.changeLanguage(e.target.value);
+              }}
+            >
+              <option value="en">Eng</option>
+              <option value="hi">हिन्दी</option>
+              <option value="gu">ગુજરાતી</option>
+            </select>
+          </li>
         </ul>
 
         {/* Mobile hamburger */}
@@ -147,7 +168,7 @@ export default function Navbar() {
             }}
           >
             <ul style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              {NAV_LINKS.map(link => (
+              {getNavLinks(t).map(link => (
                 <li key={link.to}>
                   <NavLink
                     to={link.to}

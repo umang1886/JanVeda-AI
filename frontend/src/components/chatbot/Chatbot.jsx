@@ -1,16 +1,17 @@
 import React, { useState, useRef, useEffect, useReducer } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { matchIntent } from '../../utils/chatEngine';
+import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 const TYPING_DELAY = 700;
 
-const QUICK_CHIPS = [
-  { label: '📋 How to register?', q: 'How to register?' },
-  { label: '📍 Find my booth', q: 'Find my booth' },
-  { label: '🚫 What is NOTA?', q: 'What is NOTA?' },
-  { label: '🖥️ How EVM works?', q: 'How EVM works?' },
-  { label: '🧾 What is VVPAT?', q: 'What is VVPAT?' },
-  { label: '📄 Voting documents', q: 'Voting documents' },
+export const QUICK_CHIPS = (t) => [
+  { label: t('chatbot_q1'), q: t('chatbot_q1').replace(/^[^\w]*/, '') },
+  { label: t('chatbot_q2'), q: t('chatbot_q2').replace(/^[^\w]*/, '') },
+  { label: t('chatbot_q3'), q: t('chatbot_q3').replace(/^[^\w]*/, '') },
+  { label: t('chatbot_q4'), q: t('chatbot_q4').replace(/^[^\w]*/, '') },
+  { label: t('chatbot_q5'), q: t('chatbot_q5').replace(/^[^\w]*/, '') },
+  { label: t('chatbot_q6'), q: t('chatbot_q6').replace(/^[^\w]*/, '') },
 ];
 
 function chatReducer(state, action) {
@@ -141,27 +142,127 @@ function MessageBubble({ msg, onChipClick }) {
 }
 
 export default function Chatbot() {
+  const { t, i18n } = useTranslation();
   const [state, dispatch] = useReducer(chatReducer, { messages: [], isTyping: false, lastIntentId: null, turnsSinceIntent: 0 });
   const [input, setInput] = useState('');
+  const [isRecording, setIsRecording] = useState(false);
   const bottomRef = useRef(null);
   const liveRegionRef = useRef(null);
   const inputRef = useRef(null);
+  const mediaRecorderRef = useRef(null);
+  const audioChunksRef = useRef([]);
+
+  const playAudio = async (text) => {
+    try {
+      const lang = i18n.language || "en";
+      let voiceConfig = { languageCode: "en-US", name: "en-US-Journey-F" };
+      if (lang.startsWith('hi')) voiceConfig = { languageCode: "hi-IN", name: "hi-IN-Neural2-A" };
+      if (lang.startsWith('gu')) voiceConfig = { languageCode: "gu-IN", name: "gu-IN-Standard-A" };
+
+      // Strip generic markdown formatting so TTS engine reads cleanly
+      const cleanText = text.replace(/(\*|_|#|>|\n)/g, ' ');
+
+      const res = await axios.post(
+        `https://texttospeech.googleapis.com/v1/text:synthesize?key=${import.meta.env.VITE_GOOGLE_CLOUD_API_KEY}`,
+        {
+          input: { text: cleanText.substring(0, 1500) }, // Prevent heavy payload limits
+          voice: voiceConfig,
+          audioConfig: { audioEncoding: "MP3" }
+        }
+      );
+      
+      const audio = new Audio("data:audio/mp3;base64," + res.data.audioContent);
+      audio.play().catch(e => {
+          console.error("Audio playback error:", e);
+          dispatch({ type: 'ADD_BOT_MESSAGE', text: "*(Browser blocked AI voice replay. Please click around the page once to allow speaker output.)*", followups: [], intentId: null });
+      });
+    } catch (err) {
+      console.error("Audio error", err.response?.data || err);
+      dispatch({ type: 'ADD_BOT_MESSAGE', text: `*(Text-to-Speech API failed: ${err.response?.data?.error?.message || err.message})*`, followups: [], intentId: null });
+    }
+  };
+
+  const handleVoice = async () => {
+    if (isRecording) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+      return;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorderRef.current = new MediaRecorder(stream);
+      audioChunksRef.current = [];
+      
+      mediaRecorderRef.current.ondataavailable = e => {
+        if (e.data.size > 0) audioChunksRef.current.push(e.data);
+      };
+      
+      mediaRecorderRef.current.onstop = async () => {
+        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+        const reader = new FileReader();
+        reader.readAsDataURL(audioBlob);
+        reader.onloadend = async () => {
+          const base64AudioMessage = reader.result.split(',')[1];
+          try {
+            const res = await axios.post(
+              `https://speech.googleapis.com/v1/speech:recognize?key=${import.meta.env.VITE_GOOGLE_CLOUD_API_KEY}`,
+              {
+                config: { encoding: "WEBM_OPUS", sampleRateHertz: 48000, languageCode: "en-US", alternativeLanguageCodes: ["hi-IN", "gu-IN"] },
+                audio: { content: base64AudioMessage }
+              }
+            );
+            const transcript = res.data.results?.[0]?.alternatives?.[0]?.transcript;
+            if (transcript) {
+                handleSend(transcript, true);
+            } else {
+                dispatch({ type: 'ADD_BOT_MESSAGE', text: "I couldn't hear what you said. Could you try speaking a bit louder or clicking the mic again?", followups: [], intentId: null });
+            }
+          } catch (err) {
+            const errMsg = err.response?.data?.error?.message || err.message;
+            console.error("Speech to text error", err.response?.data || err);
+            dispatch({ type: 'ADD_BOT_MESSAGE', text: `Google Cloud Error: ${errMsg}`, followups: [], intentId: null });
+          }
+        };
+      };
+      
+      mediaRecorderRef.current.start();
+      setIsRecording(true);
+      
+      // Auto-stop after 10 seconds to prevent endless recording if they don't click stop
+      setTimeout(() => {
+          if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
+              mediaRecorderRef.current.stop();
+              setIsRecording(false);
+          }
+      }, 10000);
+      
+    } catch (err) {
+      console.error("Mic error", err);
+      dispatch({ type: 'ADD_BOT_MESSAGE', text: "Microphone access denied or unavailable in this browser.", followups: [], intentId: null });
+    }
+  };
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [state.messages, state.isTyping]);
 
-  const handleSend = (text = input.trim()) => {
+  const handleSend = async (text = input.trim(), useVoice = false) => {
     if (!text) return;
     dispatch({ type: 'ADD_USER_MESSAGE', text });
     setInput('');
     dispatch({ type: 'SET_TYPING', value: true });
-    setTimeout(() => {
-      const contextId = state.turnsSinceIntent < 3 ? state.lastIntentId : null;
-      const { response, followups, intentId } = matchIntent(text, contextId);
-      dispatch({ type: 'ADD_BOT_MESSAGE', text: response, followups, intentId });
-      if (liveRegionRef.current) liveRegionRef.current.textContent = response;
-    }, TYPING_DELAY);
+    
+    try {
+      const res = await axios.post('http://127.0.0.1:8000/api/chat', { query: text });
+      dispatch({ type: 'ADD_BOT_MESSAGE', text: res.data.reply, followups: [], intentId: null });
+      if (liveRegionRef.current) liveRegionRef.current.textContent = res.data.reply;
+      
+      if (useVoice) {
+         playAudio(res.data.reply);
+      }
+    } catch (error) {
+      dispatch({ type: 'ADD_BOT_MESSAGE', text: 'Sorry, I am having trouble connecting to my neural network right now.', followups: [], intentId: null });
+    }
   };
 
   const copyChat = () => {
@@ -219,10 +320,10 @@ export default function Chatbot() {
               <span style={{ position: 'absolute', bottom: 2, right: 2, width: 12, height: 12, borderRadius: '50%', background: '#10B981', border: '2px solid #1d4ed8' }} />
             </div>
             <div>
-              <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '1.05rem', letterSpacing: '-0.01em' }}>JanVeda AI Assistant</div>
+              <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 800, fontSize: '1.05rem', letterSpacing: '-0.01em' }}>{t('chatbot_header')}</div>
               <div style={{ fontSize: '0.75rem', opacity: 0.78, fontFamily: 'var(--font-body)', display: 'flex', alignItems: 'center', gap: '5px' }}>
                 <span style={{ width: 7, height: 7, borderRadius: '50%', background: '#34D399', display: 'inline-block' }} />
-                Online · Instant · Offline-ready
+                {t('chatbot_status')}
               </div>
             </div>
           </div>
@@ -237,7 +338,7 @@ export default function Chatbot() {
                 onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.25)'}
                 onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.15)'}
               >
-                📋 Copy
+                📋 {t('chatbot_copy') || "Copy"}
               </button>
             )}
             <button
@@ -247,7 +348,7 @@ export default function Chatbot() {
               onMouseOver={e => e.currentTarget.style.background = 'rgba(255,255,255,0.25)'}
               onMouseOut={e => e.currentTarget.style.background = 'rgba(255,255,255,0.15)'}
             >
-              🗑️ Clear
+              🗑️ {t('chatbot_clear') || "Clear"}
             </button>
           </div>
         </div>
@@ -277,14 +378,13 @@ export default function Chatbot() {
               <div style={{ width: 80, height: 80, borderRadius: '50%', background: 'linear-gradient(135deg, #0D3E96, #2563EB)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', marginBottom: '1.25rem', boxShadow: '0 12px 35px rgba(37,99,235,0.3)' }}>
                 🗳️
               </div>
-              <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', fontWeight: 800, color: '#0D3E96', marginBottom: '0.6rem' }}>Ask me anything about Indian Elections!</h2>
-              <p style={{ color: '#64748B', fontSize: '0.9rem', maxWidth: '380px', lineHeight: 1.6, marginBottom: '1.75rem' }}>
-                I know <strong>60+ topics</strong> — voter registration, EVM, NOTA, booth finder, rights & more.
+              <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', fontWeight: 800, color: '#0D3E96', marginBottom: '0.6rem' }}>{t('chatbot_title')}</h2>
+              <p style={{ color: '#64748B', fontSize: '0.9rem', maxWidth: '380px', lineHeight: 1.6, marginBottom: '1.75rem' }} dangerouslySetInnerHTML={{ __html: t('chatbot_desc') }}>
               </p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'center' }} role="group" aria-label="Suggested questions">
-                {QUICK_CHIPS.map(chip => (
+                {QUICK_CHIPS(t).map((chip, idx) => (
                   <button
-                    key={chip.q}
+                    key={'c_'+idx}
                     onClick={() => handleSend(chip.q)}
                     aria-label={`Ask: ${chip.q}`}
                     style={{
@@ -341,7 +441,7 @@ export default function Chatbot() {
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && !e.shiftKey && handleSend()}
-            placeholder="Ask about elections, EVM, voting rights…"
+            placeholder={t('chatbot_placeholder')}
             aria-label="Type your election question"
             maxLength={300}
             style={{
@@ -360,7 +460,28 @@ export default function Chatbot() {
             onBlur={e => { e.target.style.borderColor = '#E2E8F0'; e.target.style.boxShadow = 'none'; e.target.style.background = '#F8FAFF'; }}
           />
           <button
-            onClick={() => handleSend()}
+            onClick={handleVoice}
+            aria-label="Voice input"
+            style={{
+              width: 50,
+              height: 50,
+              borderRadius: '14px',
+              background: isRecording ? '#EF4444' : '#E2E8F0',
+              color: isRecording ? 'white' : '#94A3B8',
+              border: 'none',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: '1.25rem',
+              flexShrink: 0,
+              transition: 'all 0.2s',
+            }}
+          >
+            {isRecording ? '⏹' : '🎤'}
+          </button>
+          <button
+            onClick={() => handleSend(undefined, false)}
             disabled={!input.trim()}
             aria-label="Send message"
             style={{
