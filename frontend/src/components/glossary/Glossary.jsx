@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const TERMS = [
   { term: 'EPIC', full: 'Elector\'s Photo Identity Card', category: 'Documents', definition: 'The official voter ID card issued by the Election Commission of India. Primary identity proof for voting.' },
@@ -48,6 +48,19 @@ const TERMS = [
 const CATEGORIES = ['All', ...new Set(TERMS.map(t => t.category))];
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
+function getColorByCategory(cat) {
+  const map = {
+    'Documents': '#3B82F6',
+    'Technology': '#8B5CF6',
+    'Voting Process': '#10B981',
+    'Officials': '#F59E0B',
+    'Regulations': '#EF4444',
+    'Elections': '#0EA5E9',
+    'Security': '#64748B'
+  };
+  return map[cat] || '#2563EB';
+}
+
 export default function Glossary() {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('All');
@@ -64,84 +77,139 @@ export default function Glossary() {
   const toggleBookmark = (term) => setBookmarked(prev => { const n = new Set(prev); if (n.has(term)) n.delete(term); else n.add(term); return n; });
 
   return (
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: '2rem 1rem' }}>
-      <header style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <h1 className="section-title">📖 Election Glossary</h1>
-        <p className="section-subtitle">{TERMS.length}+ election terms explained simply</p>
-      </header>
+    <div style={{ maxWidth: 1200, margin: '0 auto', padding: '3rem 1.5rem' }}>
+      
+      {/* Hero Header */}
+      <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center', marginBottom: '3rem' }}>
+        <div style={{ fontSize: '3.5rem', marginBottom: '1rem', filter: 'drop-shadow(0 10px 10px rgba(0,0,0,0.1))' }}>📖</div>
+        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', fontWeight: 900, color: '#0D3E96', letterSpacing: '-0.02em', marginBottom: '0.5rem' }}>The Civic Encyclopedia</h1>
+        <p style={{ color: '#64748B', fontSize: '1.1rem', maxWidth: 600, margin: '0 auto' }}>Demystify complex election jargon. Find exactly what {TERMS.length}+ technical democratic terms mean in simple language.</p>
+      </motion.div>
 
-      {/* Search + Filters */}
-      <div style={{ background: 'white', borderRadius: 'var(--radius-lg)', padding: '1.5rem', boxShadow: 'var(--shadow)', marginBottom: '2rem', borderTop: '4px solid var(--secondary)' }}>
-        <div className="form-group" style={{ marginBottom: '1rem' }}>
-          <label htmlFor="glossary-search" className="form-label">Search Terms</label>
-          <input
-            id="glossary-search"
-            type="search"
-            value={search}
-            onChange={e => { setSearch(e.target.value); setLetter(''); }}
-            placeholder="Search by term, abbreviation, or definition…"
-            className="form-input"
-            aria-label="Search election glossary"
-          />
-        </div>
-
-        {/* Category filter */}
-        <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '0.75rem' }} role="group" aria-label="Filter by category">
-          {CATEGORIES.map(c => (
-            <button key={c} onClick={() => setCategory(c)} className="chip" aria-pressed={category === c}
-              style={{ background: category === c ? 'var(--secondary)' : undefined, color: category === c ? 'white' : undefined, borderColor: category === c ? 'var(--secondary)' : undefined }}>
-              {c}
-            </button>
-          ))}
-        </div>
-
-        {/* A-Z filter */}
-        <div style={{ display: 'flex', gap: '0.25rem', flexWrap: 'wrap' }} role="group" aria-label="Filter by first letter">
-          <button onClick={() => setLetter('')} className="chip small" aria-pressed={!letter}
-            style={{ background: !letter ? 'var(--primary)' : undefined, color: !letter ? 'white' : undefined, borderColor: !letter ? 'var(--primary)' : undefined }}>All</button>
-          {ALPHABET.map(l => (
-            <button key={l} className="chip small" onClick={() => setLetter(l)} aria-pressed={letter === l}
-              style={{ background: letter === l ? 'var(--primary)' : undefined, color: letter === l ? 'white' : undefined, borderColor: letter === l ? 'var(--primary)' : undefined }}>
-              {l}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Results count */}
-      <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '1rem' }} aria-live="polite" aria-atomic="true">
-        Showing {filtered.length} of {TERMS.length} terms {bookmarked.size > 0 && `• ${bookmarked.size} bookmarked`}
-      </div>
-
-      {/* Terms grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: '1rem' }}>
-        {filtered.length === 0 && (
-          <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
-            No terms found. Try a different search or clear filters.
-          </div>
-        )}
-        {filtered.map(t => (
-          <motion.article key={t.term} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="card" style={{ borderLeft: '4px solid var(--primary)', padding: '1.25rem', position: 'relative' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-              <div>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', color: 'var(--secondary)', marginBottom: '0.2rem' }}>{t.term}</h3>
-                {t.full && <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>{t.full}</div>}
-              </div>
-              <div style={{ display: 'flex', gap: '0.4rem' }}>
-                <span className="badge badge-navy" style={{ fontSize: '0.7rem' }}>{t.category}</span>
-                <button
-                  onClick={() => toggleBookmark(t.term)}
-                  aria-label={bookmarked.has(t.term) ? `Remove ${t.term} from bookmarks` : `Bookmark ${t.term}`}
-                  aria-pressed={bookmarked.has(t.term)}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.1rem', color: bookmarked.has(t.term) ? 'var(--primary)' : 'var(--text-muted)', minHeight: '36px', minWidth: '36px', borderRadius: 'var(--radius-sm)' }}
-                >
-                  {bookmarked.has(t.term) ? '🔖' : '📌'}
-                </button>
-              </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 320px) 1fr', gap: '2rem', position: 'relative' }}>
+        
+        {/* Left Control Panel */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          
+          {/* Main Search */}
+          <div style={{ position: 'sticky', top: '100px', background: 'white', borderRadius: '24px', padding: '1.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.05)', border: '1px solid #E2E8F0' }}>
+            <div style={{ position: 'relative', marginBottom: '1.5rem' }}>
+              <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', fontSize: '1.2rem', color: '#94A3B8' }}>🔍</span>
+              <input
+                type="search"
+                value={search}
+                onChange={e => { setSearch(e.target.value); setLetter(''); }}
+                placeholder="Search acronyms..."
+                style={{ width: '100%', padding: '1rem 1rem 1rem 3rem', background: '#F8FAFF', border: '2px solid #E2E8F0', borderRadius: '14px', fontFamily: 'var(--font-body)', fontSize: '1rem', color: '#1E293B', outline: 'none', transition: 'all 0.2s' }}
+                onFocus={e => { e.target.style.borderColor = '#2563EB'; e.target.style.background = 'white' }}
+                onBlur={e => { e.target.style.borderColor = '#E2E8F0'; e.target.style.background = '#F8FAFF' }}
+              />
             </div>
-            <p style={{ color: 'var(--text-primary)', fontSize: '0.9rem', lineHeight: 1.65 }}>{t.definition}</p>
-          </motion.article>
-        ))}
+
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.9rem', color: '#64748B', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '1rem' }}>Filter by Context</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+              {CATEGORIES.map(c => {
+                const isActive = category === c;
+                return (
+                  <button
+                    key={c}
+                    onClick={() => setCategory(c)}
+                    style={{
+                      display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.8rem 1rem',
+                      background: isActive ? '#EFF6FF' : 'transparent', border: isActive ? '1px solid #BFDBFE' : '1px solid transparent',
+                      borderRadius: '12px', cursor: 'pointer', textAlign: 'left', transition: 'all 0.2s',
+                      color: isActive ? '#1D4ED8' : '#475569', fontWeight: isActive ? 700 : 500, fontFamily: 'var(--font-heading)'
+                    }}
+                    onMouseEnter={e => { if(!isActive) e.currentTarget.style.background = '#F8FAFF' }}
+                    onMouseLeave={e => { if(!isActive) e.currentTarget.style.background = 'transparent' }}
+                  >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <span style={{ width: 10, height: 10, borderRadius: '50%', background: c === 'All' ? '#1E293B' : getColorByCategory(c) }} />
+                      {c}
+                    </div>
+                    {isActive && <span>✓</span>}
+                  </button>
+                )
+              })}
+            </div>
+            
+            <div style={{ height: '1px', background: '#E2E8F0', margin: '1.5rem 0' }} />
+
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.9rem', color: '#64748B', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '1rem' }}>Index</h3>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '5px' }}>
+              {ALPHABET.map(l => (
+                  <button 
+                    key={l} 
+                    onClick={() => setLetter(letter === l ? '' : l)}
+                    style={{ width: '32px', height: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '8px', border: 'none', background: letter === l ? '#2563EB' : '#F1F5F9', color: letter === l ? 'white' : '#64748B', fontSize: '0.8rem', fontWeight: 700, cursor: 'pointer', transition: 'all 0.2s' }}
+                  >
+                    {l}
+                  </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Right Content Area */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+          
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 1rem' }}>
+            <div style={{ fontSize: '1rem', color: '#64748B', fontWeight: 500 }}>
+              Showing <span style={{ color: '#1E293B', fontWeight: 800 }}>{filtered.length}</span> terms {bookmarked.size > 0 && <span style={{ color: '#2563EB', marginLeft: '10px' }}>• {bookmarked.size} saved 📌</span>}
+            </div>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem' }}>
+            <AnimatePresence>
+              {filtered.length === 0 && (
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '4rem 2rem', background: 'white', borderRadius: '24px', border: '1px dashed #CBD5E1' }}>
+                  <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>🧐</div>
+                  <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', color: '#1E293B' }}>No terms found matching '{search}'</h3>
+                  <p style={{ color: '#64748B' }}>Try searching something else or clearing your filters.</p>
+                </motion.div>
+              )}
+              
+              {filtered.map(t => {
+                const isSaved = bookmarked.has(t.term);
+                return (
+                  <motion.article 
+                    layout 
+                    initial={{ opacity: 0, scale: 0.95 }} 
+                    animate={{ opacity: 1, scale: 1 }} 
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    key={t.term} 
+                    style={{ background: 'white', borderRadius: '20px', padding: '1.5rem', boxShadow: '0 10px 20px rgba(0,0,0,0.03)', border: '1px solid #E2E8F0', position: 'relative', display: 'flex', flexDirection: 'column' }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+                      <div style={{ paddingRight: '2rem' }}>
+                        <div style={{ display: 'inline-block', padding: '0.2rem 0.6rem', background: `${getColorByCategory(t.category)}15`, color: getColorByCategory(t.category), borderRadius: '10px', fontSize: '0.7rem', fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '0.5rem' }}>
+                          {t.category}
+                        </div>
+                        <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.3rem', fontWeight: 800, color: '#1E293B', margin: 0 }}>{t.term}</h3>
+                        {t.full && <div style={{ fontSize: '0.85rem', color: '#64748B', fontWeight: 600, marginTop: '0.2rem' }}>{t.full}</div>}
+                      </div>
+
+                      <button
+                        onClick={() => toggleBookmark(t.term)}
+                        style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.2rem', opacity: isSaved ? 1 : 0.4, transition: 'all 0.2s', filter: isSaved ? 'drop-shadow(0 2px 4px rgba(0,0,0,0.2))' : 'none' }}
+                        onMouseEnter={e => e.currentTarget.style.opacity = 1}
+                        onMouseLeave={e => { if(!isSaved) e.currentTarget.style.opacity = 0.4 }}
+                      >
+                        {isSaved ? '📌' : '🔖'}
+                      </button>
+                    </div>
+                    
+                    <p style={{ color: '#475569', fontSize: '0.95rem', lineHeight: 1.6, flex: 1, margin: 0 }}>
+                      {t.definition}
+                    </p>
+                  </motion.article>
+                )
+              })}
+            </AnimatePresence>
+          </div>
+        </div>
+
       </div>
     </div>
   );

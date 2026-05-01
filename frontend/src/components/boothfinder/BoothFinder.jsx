@@ -33,7 +33,8 @@ export default function BoothFinder() {
     setError(''); setLoading(true); setBooths(null);
 
     try {
-      const res = await axios.get(`http://127.0.0.1:8000/api/booth?pincode=${pc}`, { timeout: 4000 });
+      const apiUrl = import.meta.env.VITE_API_URL || '/api';
+      const res = await axios.get(`${apiUrl}/booth?pincode=${pc}`, { timeout: 4000 });
       let data = res.data.booths || [];
       // Enrich with mock live data
       data = data.map(b => ({
