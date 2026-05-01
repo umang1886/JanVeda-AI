@@ -1,9 +1,5 @@
 import React, { useState, useMemo } from 'react';
-<<<<<<< HEAD
 import { motion, AnimatePresence } from 'framer-motion';
-=======
-import { motion } from 'framer-motion';
->>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
 
 const TERMS = [
   { term: 'EPIC', full: 'Elector\'s Photo Identity Card', category: 'Documents', definition: 'The official voter ID card issued by the Election Commission of India. Primary identity proof for voting.' },
@@ -52,7 +48,6 @@ const TERMS = [
 const CATEGORIES = ['All', ...new Set(TERMS.map(t => t.category))];
 const ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 
-<<<<<<< HEAD
 function getColorByCategory(cat) {
   const map = {
     'Documents': '#3B82F6',
@@ -65,9 +60,6 @@ function getColorByCategory(cat) {
   };
   return map[cat] || '#2563EB';
 }
-
-=======
->>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
 export default function Glossary() {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('All');
@@ -84,7 +76,6 @@ export default function Glossary() {
   const toggleBookmark = (term) => setBookmarked(prev => { const n = new Set(prev); if (n.has(term)) n.delete(term); else n.add(term); return n; });
 
   return (
-<<<<<<< HEAD
     <div style={{ maxWidth: 1200, margin: '0 auto', padding: '3rem 1.5rem' }}>
       
       {/* Hero Header */}
@@ -94,10 +85,10 @@ export default function Glossary() {
         <p style={{ color: '#64748B', fontSize: '1.1rem', maxWidth: 600, margin: '0 auto' }}>Demystify complex election jargon. Find exactly what {TERMS.length}+ technical democratic terms mean in simple language.</p>
       </motion.div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'minmax(280px, 320px) 1fr', gap: '2rem', position: 'relative' }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2rem', position: 'relative' }}>
         
         {/* Left Control Panel */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <div style={{ flex: '1 1 280px', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           
           {/* Main Search */}
           <div style={{ position: 'sticky', top: '100px', background: 'white', borderRadius: '24px', padding: '1.5rem', boxShadow: '0 20px 40px rgba(0,0,0,0.05)', border: '1px solid #E2E8F0' }}>
@@ -159,7 +150,7 @@ export default function Glossary() {
         </div>
 
         {/* Right Content Area */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+        <div style={{ flex: '3 1 500px', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
           
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0 1rem' }}>
             <div style={{ fontSize: '1rem', color: '#64748B', fontWeight: 500 }}>
@@ -167,7 +158,7 @@ export default function Glossary() {
             </div>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
             <AnimatePresence>
               {filtered.length === 0 && (
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '4rem 2rem', background: 'white', borderRadius: '24px', border: '1px dashed #CBD5E1' }}>
@@ -217,87 +208,6 @@ export default function Glossary() {
             </AnimatePresence>
           </div>
         </div>
-
-=======
-    <div style={{ maxWidth: 900, margin: '0 auto', padding: '2rem 1rem' }}>
-      <header style={{ textAlign: 'center', marginBottom: '2rem' }}>
-        <h1 className="section-title">📖 Election Glossary</h1>
-        <p className="section-subtitle">{TERMS.length}+ election terms explained simply</p>
-      </header>
-
-      {/* Search + Filters */}
-      <div style={{ background: 'white', borderRadius: 'var(--radius-lg)', padding: '1.5rem', boxShadow: 'var(--shadow)', marginBottom: '2rem', borderTop: '4px solid var(--secondary)' }}>
-        <div className="form-group" style={{ marginBottom: '1rem' }}>
-          <label htmlFor="glossary-search" className="form-label">Search Terms</label>
-          <input
-            id="glossary-search"
-            type="search"
-            value={search}
-            onChange={e => { setSearch(e.target.value); setLetter(''); }}
-            placeholder="Search by term, abbreviation, or definition…"
-            className="form-input"
-            aria-label="Search election glossary"
-          />
-        </div>
-
-        {/* Category filter */}
-        <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '0.75rem' }} role="group" aria-label="Filter by category">
-          {CATEGORIES.map(c => (
-            <button key={c} onClick={() => setCategory(c)} className="chip" aria-pressed={category === c}
-              style={{ background: category === c ? 'var(--secondary)' : undefined, color: category === c ? 'white' : undefined, borderColor: category === c ? 'var(--secondary)' : undefined }}>
-              {c}
-            </button>
-          ))}
-        </div>
-
-        {/* A-Z filter */}
-        <div style={{ display: 'flex', gap: '0.25rem', flexWrap: 'wrap' }} role="group" aria-label="Filter by first letter">
-          <button onClick={() => setLetter('')} className="chip small" aria-pressed={!letter}
-            style={{ background: !letter ? 'var(--primary)' : undefined, color: !letter ? 'white' : undefined, borderColor: !letter ? 'var(--primary)' : undefined }}>All</button>
-          {ALPHABET.map(l => (
-            <button key={l} className="chip small" onClick={() => setLetter(l)} aria-pressed={letter === l}
-              style={{ background: letter === l ? 'var(--primary)' : undefined, color: letter === l ? 'white' : undefined, borderColor: letter === l ? 'var(--primary)' : undefined }}>
-              {l}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Results count */}
-      <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: '1rem' }} aria-live="polite" aria-atomic="true">
-        Showing {filtered.length} of {TERMS.length} terms {bookmarked.size > 0 && `• ${bookmarked.size} bookmarked`}
-      </div>
-
-      {/* Terms grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(380px, 1fr))', gap: '1rem' }}>
-        {filtered.length === 0 && (
-          <div style={{ gridColumn: '1 / -1', textAlign: 'center', padding: '3rem', color: 'var(--text-secondary)' }}>
-            No terms found. Try a different search or clear filters.
-          </div>
-        )}
-        {filtered.map(t => (
-          <motion.article key={t.term} layout initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="card" style={{ borderLeft: '4px solid var(--primary)', padding: '1.25rem', position: 'relative' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.5rem' }}>
-              <div>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.05rem', color: 'var(--secondary)', marginBottom: '0.2rem' }}>{t.term}</h3>
-                {t.full && <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontStyle: 'italic' }}>{t.full}</div>}
-              </div>
-              <div style={{ display: 'flex', gap: '0.4rem' }}>
-                <span className="badge badge-navy" style={{ fontSize: '0.7rem' }}>{t.category}</span>
-                <button
-                  onClick={() => toggleBookmark(t.term)}
-                  aria-label={bookmarked.has(t.term) ? `Remove ${t.term} from bookmarks` : `Bookmark ${t.term}`}
-                  aria-pressed={bookmarked.has(t.term)}
-                  style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.1rem', color: bookmarked.has(t.term) ? 'var(--primary)' : 'var(--text-muted)', minHeight: '36px', minWidth: '36px', borderRadius: 'var(--radius-sm)' }}
-                >
-                  {bookmarked.has(t.term) ? '🔖' : '📌'}
-                </button>
-              </div>
-            </div>
-            <p style={{ color: 'var(--text-primary)', fontSize: '0.9rem', lineHeight: 1.65 }}>{t.definition}</p>
-          </motion.article>
-        ))}
->>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
       </div>
     </div>
   );
