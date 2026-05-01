@@ -8,8 +8,8 @@ const PHASES = [
   { id: 3, icon: '📝', name: 'Candidate Nomination', color: '#9B59B6', start: '2026-03-15', end: '2026-03-22', description: 'Candidates file their nomination papers with the Returning Officer, along with affidavits declaring assets, liabilities, and criminal records.', citizenAction: 'Research candidates — read their affidavits on affidavitarchive.eci.gov.in. Know who is contesting in your constituency.' },
   { id: 4, icon: '📣', name: 'Election Campaigning', color: '#F6AD55', start: '2026-03-22', end: '2026-04-10', description: 'Parties and candidates hold rallies, door-to-door campaigns, and media outreach. Model Code of Conduct prevents government from announcing new schemes.', citizenAction: 'Attend public meetings, watch debates, read party manifestos. Make an informed voting decision. Report violations via cVIGIL.' },
   { id: 5, icon: '🗳️', name: 'Voting Day', color: '#2ECC71', start: '2026-04-12', end: '2026-04-12', description: 'Polling day! Booths open 7 AM – 6 PM. Voters cast their votes on the Electronic Voting Machine. VVPAT provides paper verification.', citizenAction: 'Carry your Voter ID (or alternate photo ID). Check your booth location. Vote in the morning to avoid queues. Do NOT photograph inside the booth.' },
-  { id: 6, icon: '🔢', name: 'Vote Counting', color: '#E53E3E', start: '2026-04-15', end: '2026-04-15', description: 'EVMs are opened at counting centers. Candidate agents observe the count. Results are announced seat by seat throughout the day.', citizenAction: 'Watch live on Doordarshan or ECI\'s official results portal (results.eci.gov.in). First-past-the-post determines the winner.' },
-  { id: 7, icon: '🏆', name: 'Results & Government Formation', color: '#27AE60', start: '2026-04-16', end: '2026-04-20', description: 'Winning candidates are declared by the Returning Officers. The winning party or coalition forms the government and the new leadership is sworn in.', citizenAction: 'Stay informed about the new government\'s priorities. Engage with your elected representative through their offices.' },
+  { id: 6, icon: '🔢', name: 'Vote Counting', color: '#E53E3E', start: '2026-04-15', end: '2026-04-15', description: 'EVMs are opened at counting centers. Candidate agents observe the count. Results are announced seat by seat throughout the day.', citizenAction: "Watch live on Doordarshan or ECI's official results portal (results.eci.gov.in). First-past-the-post determines the winner." },
+  { id: 7, icon: '🏆', name: 'Results & Government Formation', color: '#27AE60', start: '2026-04-16', end: '2026-04-20', description: "Winning candidates are declared by the Returning Officers. The winning party or coalition forms the government and the new leadership is sworn in.", citizenAction: "Stay informed about the new government's priorities. Engage with your elected representative through their offices." },
 ];
 
 const TODAY = new Date('2026-04-25'); // Hardcoded mock date
@@ -25,7 +25,6 @@ function getCurrentPhase() {
 
 export default function ElectionTimeline() {
   const [expanded, setExpanded] = useState(null);
-<<<<<<< HEAD
   const currentPhase = getCurrentPhase();
 
   // Auto-expand the current phase
@@ -38,15 +37,15 @@ export default function ElectionTimeline() {
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center', marginBottom: '4rem' }}>
         <div style={{ fontSize: '3rem', marginBottom: '1rem', textShadow: '0 10px 20px rgba(0,0,0,0.1)' }}>🗓️</div>
         <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', fontWeight: 900, color: '#0D3E96', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>The Election Timeline</h1>
-        <p style={{ color: '#64748B', fontSize: '1.1rem', maxWidth: 600, margin: '0 auto' }}>Tracking the complete 7-phase lifecycle of the world's largest democratic exercise.</p>
+        <p style={{ color: '#64748B', fontSize: '1.1rem', maxWidth: 600, margin: '0 auto' }}>Tracking the complete 7-phase lifecycle of the world&apos;s largest democratic exercise.</p>
         
         {/* Progress HUD */}
-        <div style={{ background: 'white', borderRadius: '20px', padding: '1.5rem 2rem', marginTop: '2.5rem', boxShadow: '0 10px 30px rgba(37,99,235,0.08)', border: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', gap: '2rem' }}>
+        <div style={{ background: 'white', borderRadius: '20px', padding: '1.5rem 2rem', marginTop: '2.5rem', boxShadow: '0 10px 30px rgba(37,99,235,0.08)', border: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', gap: '2rem', flexWrap: 'wrap' }}>
           <div style={{ flexShrink: 0 }}>
             <div style={{ fontSize: '0.8rem', color: '#94A3B8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px' }}>Current Status</div>
             <div style={{ fontSize: '1.2rem', fontFamily: 'var(--font-heading)', fontWeight: 800, color: '#1E293B' }}>{currentPhase > PHASES.length ? 'Elections Concluded' : `Phase ${currentPhase} Active`}</div>
           </div>
-          <div style={{ flex: 1 }}>
+          <div style={{ flex: 1, minWidth: '150px' }}>
             <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '0.4rem', fontSize: '0.85rem', fontWeight: 800, color: '#2563EB' }}>
               {Math.min(100, Math.round(((currentPhase - 1) / PHASES.length) * 100))}% Complete
             </div>
@@ -107,7 +106,7 @@ export default function ElectionTimeline() {
                     }}
                   >
                     {/* Card Header */}
-                    <div style={{ padding: '1.5rem', display: 'flex', gap: '1.5rem', alignItems: 'center', justifyContent: 'space-between', background: isActive ? `${phase.color}08` : 'white' }}>
+                    <div style={{ padding: '1.5rem', display: 'flex', gap: '1.5rem', alignItems: 'center', justifyContent: 'space-between', background: isActive ? `${phase.color}08` : 'white', flexWrap: 'wrap' }}>
                       <div>
                         <div style={{ fontSize: '0.8rem', fontFamily: 'var(--font-heading)', fontWeight: 800, textTransform: 'uppercase', color: isPast ? '#10B981' : isActive ? phase.color : '#94A3B8', letterSpacing: '1px', marginBottom: '0.4rem' }}>
                           Phase {phase.id} {isActive && '— Live Now'}
@@ -147,7 +146,6 @@ export default function ElectionTimeline() {
               </motion.article>
             );
           })}
-        </div>
         </div>
       </div>
     </div>

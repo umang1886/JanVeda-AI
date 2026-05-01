@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+﻿import React, { useState, useReducer } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 
@@ -10,18 +10,18 @@ const QUESTIONS = [
   { id: 5, q: 'What app can citizens use to report election violations?', opts: ['Voter ID App', 'cVIGIL', 'UMANG', 'DigiLocker'], correct: 1, explanation: 'cVIGIL is the ECI app for citizens to report election violations. Flying Squads respond within 100 minutes.' },
   { id: 6, q: 'What form is used for new voter registration?', opts: ['Form 1', 'Form 4', 'Form 6', 'Form 8'], correct: 2, explanation: 'Form 6 is used for new voter enrollment. Form 8 is for corrections, Form 7 for deletion requests.' },
   { id: 7, q: 'Which finger gets the indelible ink during voting?', opts: ['Right index', 'Right thumb', 'Left index', 'Left thumb'], correct: 2, explanation: 'Indelible ink is applied on the left index finger. It contains Silver Nitrate and cannot be easily removed.' },
-  { id: 8, q: 'What does EPIC stand for?', opts: ['Election Photo ID Card', 'Electoral Photo Identity Card', 'Electronic Photo Identity Card', 'Elector Participation Identity Card'], correct: 1, explanation: 'EPIC stands for Elector\'s Photo Identity Card — the official voter ID issued by the Election Commission of India.' },
+  { id: 8, q: 'What does EPIC stand for?', opts: ['Election Photo ID Card', 'Electoral Photo Identity Card', 'Electronic Photo Identity Card', 'Elector Participation Identity Card'], correct: 1, explanation: 'EPIC stands for Elector\'s Photo Identity Card â€” the official voter ID issued by the Election Commission of India.' },
   { id: 9, q: 'How many days before election does campaigning have to stop?', opts: ['24 hours', '36 hours', '48 hours', '72 hours'], correct: 2, explanation: 'The \'silent period\' begins 48 hours before the start of polling. No rallies, speeches, or canvassing are allowed.' },
   { id: 10, q: 'What is the Model Code of Conduct?', opts: ['Rules for EVM testing', 'Guidelines for election campaigns & conduct', 'Voter registration rules', 'Counting day procedures'], correct: 1, explanation: 'The Model Code of Conduct (MCC) is a set of guidelines issued by ECI to regulate political parties and candidates during elections.' },
   { id: 11, q: 'Which article of the Constitution establishes the Election Commission of India?', opts: ['Article 226', 'Article 300', 'Article 324', 'Article 356'], correct: 2, explanation: 'Article 324 of the Indian Constitution establishes the Election Commission of India and vests it with authority over elections.' },
   { id: 12, q: 'Can an NRI (Non-Resident Indian) vote in Indian elections?', opts: ['No, NRIs cannot vote', 'Yes, but must physically be present in India', 'Yes, via postal ballot', 'Yes, via online voting'], correct: 1, explanation: 'NRIs can register as overseas electors and vote, but must physically be present at their designated polling booth in India. No postal ballot for NRIs yet.' },
   { id: 13, q: 'What is a by-election?', opts: ['An election in rural areas', 'An election held when a seat falls vacant mid-term', 'A second round of elections if no majority', 'An election for Rajya Sabha'], correct: 1, explanation: 'A by-election (or bye-election) is held for a single constituency when the seat falls vacant due to death, resignation, or disqualification of the elected member.' },
   { id: 14, q: 'Who is the Booth Level Officer (BLO)?', opts: ['The Presiding Officer on election day', 'A government official who manages voter rolls for a booth area', 'A police officer at the polling booth', 'A candidate\'s representative at the booth'], correct: 1, explanation: 'A BLO is a grassroots government official (often a school teacher) responsible for maintaining the voter roll accuracy for their assigned booth area.' },
-  { id: 15, q: 'Is your vote truly secret in India?', opts: ['No — officers can see your choice', 'Yes — EVM records only counts, not who voted for whom', 'Only for computerized booths', 'No — your EPIC number is linked to your vote'], correct: 1, explanation: 'Your vote is completely secret. EVMs only record vote counts — they do not link individual voters to their choices. It is the law that nobody can ask you how you voted.' },
-  { id: 16, q: 'What is the spending limit for a Lok Sabha candidate?', opts: ['₹10 lakh', '₹25 lakh', '₹70–95 lakh', '₹5 crore'], correct: 2, explanation: 'The ECI-set expenditure limit for Lok Sabha candidates varies from ₹70 lakh to ₹95 lakh depending on the state. Violations can lead to disqualification.' },
+  { id: 15, q: 'Is your vote truly secret in India?', opts: ['No â€” officers can see your choice', 'Yes â€” EVM records only counts, not who voted for whom', 'Only for computerized booths', 'No â€” your EPIC number is linked to your vote'], correct: 1, explanation: 'Your vote is completely secret. EVMs only record vote counts â€” they do not link individual voters to their choices. It is the law that nobody can ask you how you voted.' },
+  { id: 16, q: 'What is the spending limit for a Lok Sabha candidate?', opts: ['â‚¹10 lakh', 'â‚¹25 lakh', 'â‚¹70â€“95 lakh', 'â‚¹5 crore'], correct: 2, explanation: 'The ECI-set expenditure limit for Lok Sabha candidates varies from â‚¹70 lakh to â‚¹95 lakh depending on the state. Violations can lead to disqualification.' },
   { id: 17, q: 'When was the VVPAT machine made mandatory in all Indian elections?', opts: ['2004', '2009', '2014', '2019'], correct: 3, explanation: 'VVPAT machines were made mandatory in all polling stations across India starting from the 2019 Lok Sabha General Elections.' },
-  { id: 18, q: 'What is the National Voters\' Day and when is it?', opts: ['March 1 — to promote voter awareness', 'January 25 — celebrating ECI\'s establishment', 'November 26 — celebrating the Constitution', 'August 15 — Independence Day'], correct: 1, explanation: 'January 25th is National Voters\' Day, celebrating the establishment of the Election Commission of India on January 25, 1950. It promotes voter awareness.' },
-  { id: 19, q: 'What penalty can an employer face for denying employees leave to vote?', opts: ['No penalty', '₹500 fine', 'Criminal prosecution under election law', '₹100 fine'], correct: 2, explanation: 'Employers are required by law to grant employees paid leave on election day. Denying this leave can result in criminal prosecution under election law.' },
+  { id: 18, q: 'What is the National Voters\' Day and when is it?', opts: ['March 1 â€” to promote voter awareness', 'January 25 â€” celebrating ECI\'s establishment', 'November 26 â€” celebrating the Constitution', 'August 15 â€” Independence Day'], correct: 1, explanation: 'January 25th is National Voters\' Day, celebrating the establishment of the Election Commission of India on January 25, 1950. It promotes voter awareness.' },
+  { id: 19, q: 'What penalty can an employer face for denying employees leave to vote?', opts: ['No penalty', 'â‚¹500 fine', 'Criminal prosecution under election law', 'â‚¹100 fine'], correct: 2, explanation: 'Employers are required by law to grant employees paid leave on election day. Denying this leave can result in criminal prosecution under election law.' },
   { id: 20, q: 'How many Lok Sabha constituencies are there in India?', opts: ['400', '452', '543', '600'], correct: 2, explanation: 'India has 543 Lok Sabha constituencies. Each constituency elects one Member of Parliament (MP) by first-past-the-post voting.' },
 ];
 
@@ -42,17 +42,10 @@ function quizReducer(state, action) {
 
 function getBadge(score, total) {
   const pct = score / total;
-<<<<<<< HEAD
-  if (pct === 1) return { label: '🏆 Civic Champion!', desc: 'Flawless! You know exactly how the Indian democratic engine works.', color: '#10B981', bg: 'linear-gradient(135deg, #10B981, #059669)' };
-  if (pct >= 0.8) return { label: '🥇 Informed Voter!', desc: 'Incredible score. You are highly educated on your electoral rights.', color: '#3B82F6', bg: 'linear-gradient(135deg, #3B82F6, #2563EB)' };
-  if (pct >= 0.6) return { label: '🥈 Good Citizen!', desc: 'Solid attempt! But there is always more to learn about your voting system.', color: '#F59E0B', bg: 'linear-gradient(135deg, #F59E0B, #D97706)' };
-  return { label: '🥉 Keep Learning!', desc: 'You need to brush up on your civic knowledge. Knowledge is power!', color: '#64748B', bg: 'linear-gradient(135deg, #64748B, #475569)' };
-=======
-  if (pct === 1) return { label: '🏆 Civic Champion!', color: 'var(--primary)' };
-  if (pct >= 0.8) return { label: '🥇 Informed Voter!', color: 'var(--accent-dark)' };
-  if (pct >= 0.6) return { label: '🥈 Good Citizen!', color: 'var(--secondary-light)' };
-  return { label: '🥉 Keep Learning!', color: 'var(--text-secondary)' };
->>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
+  if (pct === 1) return { label: 'ðŸ† Civic Champion!', desc: 'Flawless! You know exactly how the Indian democratic engine works.', color: '#10B981', bg: 'linear-gradient(135deg, #10B981, #059669)' };
+  if (pct >= 0.8) return { label: 'ðŸ¥‡ Informed Voter!', desc: 'Incredible score. You are highly educated on your electoral rights.', color: '#3B82F6', bg: 'linear-gradient(135deg, #3B82F6, #2563EB)' };
+  if (pct >= 0.6) return { label: 'ðŸ¥ˆ Good Citizen!', desc: 'Solid attempt! But there is always more to learn about your voting system.', color: '#F59E0B', bg: 'linear-gradient(135deg, #F59E0B, #D97706)' };
+  return { label: 'ðŸ¥‰ Keep Learning!', desc: 'You need to brush up on your civic knowledge. Knowledge is power!', color: '#64748B', bg: 'linear-gradient(135deg, #64748B, #475569)' };
 }
 
 export default function ElectionQuiz() {
@@ -64,18 +57,13 @@ export default function ElectionQuiz() {
   React.useEffect(() => {
     if (state.finished) {
       const score = state.score / QUESTIONS.length;
-<<<<<<< HEAD
       confetti({ particleCount: score >= 0.8 ? 250 : 100, spread: 100, origin: { y: 0.6 }, colors: ['#FF6600', '#2563EB', '#10B981', '#FFFFFF'] });
-=======
-      confetti({ particleCount: score >= 0.8 ? 150 : 60, spread: 70, colors: ['#FF6B35', '#1B3A6B', '#2ECC71', '#fff'] });
->>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
     }
   }, [state.finished]);
 
   if (state.finished) {
     const badge = getBadge(state.score, QUESTIONS.length);
     return (
-<<<<<<< HEAD
       <div style={{ maxWidth: 640, margin: '4rem auto', padding: '1rem', textAlign: 'center' }}>
         <motion.div initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} transition={{ type: 'spring', bounce: 0.5 }} style={{ background: 'white', borderRadius: '32px', overflow: 'hidden', boxShadow: '0 25px 50px rgba(0,0,0,0.1)' }}>
           <div style={{ background: badge.bg, padding: '4rem 2rem', color: 'white' }}>
@@ -96,35 +84,18 @@ export default function ElectionQuiz() {
 
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <button onClick={() => dispatch({ type: 'RESTART' })} style={{ padding: '1rem 2rem', background: '#F1F5F9', border: 'none', borderRadius: '16px', color: '#1E293B', fontWeight: 800, fontSize: '1rem', cursor: 'pointer', transition: 'all 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = '#E2E8F0'} onMouseLeave={e => e.currentTarget.style.background = '#F1F5F9'}>
-                🔄 Retake Quiz
+                ðŸ”„ Retake Quiz
               </button>
               <a href="/chatbot" style={{ textDecoration: 'none', padding: '1rem 2rem', background: badge.color, border: 'none', borderRadius: '16px', color: 'white', fontWeight: 800, fontSize: '1rem', cursor: 'pointer', transition: 'all 0.2s', boxShadow: `0 10px 20px ${badge.color}40` }}>
-                💬 Explore AI Chatbot
+                ðŸ’¬ Explore AI Chatbot
               </a>
             </div>
-=======
-      <div style={{ maxWidth: 540, margin: '2rem auto', padding: '1rem', textAlign: 'center' }}>
-        <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="card" style={{ borderTop: `4px solid ${badge.color}` }}>
-          <div style={{ fontSize: '4rem', margin: '0.5rem 0' }}>{badge.label.split(' ')[0]}</div>
-          <h2 style={{ fontFamily: 'var(--font-heading)', color: 'var(--secondary)', margin: '0.5rem 0' }}>{badge.label.slice(2)}</h2>
-          <div style={{ fontSize: '3rem', fontFamily: 'var(--font-heading)', fontWeight: 700, color: badge.color, margin: '1rem 0' }}>{state.score}/{QUESTIONS.length}</div>
-          <div className="progress-bar" style={{ marginBottom: '1.5rem' }}>
-            <div className="progress-fill" style={{ width: `${(state.score / QUESTIONS.length) * 100}%` }} />
-          </div>
-          <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
-            {state.score === QUESTIONS.length ? 'Perfect score! You\'re a civic knowledge expert!' : `You got ${state.score} out of ${QUESTIONS.length} questions correct. Keep learning!`}
-          </p>
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-            <button className="btn btn-primary" onClick={() => dispatch({ type: 'RESTART' })}>🔄 Try Again</button>
-            <a href="/chatbot" className="btn btn-secondary">💬 Learn More</a>
->>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
           </div>
         </motion.div>
       </div>
     );
   }
 
-<<<<<<< HEAD
   // Active Quiz View
   return (
     <div style={{ maxWidth: 800, margin: '0 auto', padding: '3rem 1.5rem' }}>
@@ -143,7 +114,7 @@ export default function ElectionQuiz() {
           <div style={{ width: '1px', background: '#E2E8F0' }} />
           <div>
             <div style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 800, textTransform: 'uppercase' }}>Score</div>
-            <div style={{ fontSize: '1.2rem', fontFamily: 'var(--font-heading)', fontWeight: 800, color: '#10B981' }}>{state.score} ✓</div>
+            <div style={{ fontSize: '1.2rem', fontFamily: 'var(--font-heading)', fontWeight: 800, color: '#10B981' }}>{state.score} âœ“</div>
           </div>
         </div>
       </div>
@@ -200,66 +171,20 @@ export default function ElectionQuiz() {
                       width: 32, height: 32, borderRadius: '50%', background: isRevealed && isCorrectAnswer ? '#10B981' : isSelected && !state.isCorrect ? '#EF4444' : '#F1F5F9', 
                       color: isRevealed && (isCorrectAnswer || isSelected) ? 'white' : '#64748B', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem', fontWeight: 800, flexShrink: 0 
                     }}>
-                      {isRevealed && isCorrectAnswer ? '✓' : isRevealed && isSelected && !state.isCorrect ? '✗' : String.fromCharCode(65 + i)}
+                      {isRevealed && isCorrectAnswer ? 'âœ“' : isRevealed && isSelected && !state.isCorrect ? 'âœ—' : String.fromCharCode(65 + i)}
                     </div>
                     <span style={{ fontSize: '1.05rem', fontWeight: isRevealed && isCorrectAnswer ? 800 : 600, color }}>{opt}</span>
-=======
-  return (
-    <div style={{ maxWidth: 640, margin: '2rem auto', padding: '1rem' }}>
-      {/* Header + Progress */}
-      <div style={{ marginBottom: '1.5rem' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-          <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--secondary)' }}>Quiz — Election Civic Knowledge</span>
-          <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--primary)', fontSize: '0.9rem' }}>{state.current + 1} / {QUESTIONS.length}</span>
-        </div>
-        <div className="progress-bar" role="progressbar" aria-valuenow={state.current + 1} aria-valuemin={1} aria-valuemax={QUESTIONS.length} aria-label={`Question ${state.current + 1} of ${QUESTIONS.length}`}>
-          <div className="progress-fill" style={{ width: `${pct}%` }} />
-        </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.4rem', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-          <span>Score: {state.score} ✓</span>
-          <span>{QUESTIONS.length - state.current - 1} remaining</span>
-        </div>
-      </div>
-
-      <AnimatePresence mode="wait">
-        <motion.div key={q.id} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }}>
-          <div className="card" style={{ borderTop: '4px solid var(--secondary)' }}>
-            <div className="badge badge-navy" style={{ marginBottom: '1rem' }}>Q{state.current + 1}</div>
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', color: 'var(--secondary)', marginBottom: '1.5rem', lineHeight: 1.5 }}>{q.q}</h2>
-
-            <div role="radiogroup" aria-label="Answer options" style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
-              {q.opts.map((opt, i) => {
-                let bg = 'var(--surface)', border = 'var(--surface-2)', color = 'var(--text-primary)';
-                if (state.answered !== null) {
-                  if (i === q.correct) { bg = 'rgba(46,204,113,0.15)'; border = 'var(--accent)'; color = 'var(--accent-dark)'; }
-                  else if (i === state.answered && !state.isCorrect) { bg = 'rgba(229,62,62,0.12)'; border = 'var(--error)'; color = 'var(--error)'; }
-                }
-                return (
-                  <button
-                    key={i}
-                    role="radio"
-                    aria-checked={state.answered === i}
-                    disabled={state.answered !== null}
-                    onClick={() => dispatch({ type: 'ANSWER', idx: i })}
-                    style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.875rem 1rem', background: bg, border: `2px solid ${border}`, borderRadius: 'var(--radius)', cursor: state.answered === null ? 'pointer' : 'default', textAlign: 'left', fontFamily: 'var(--font-body)', fontSize: '0.95rem', color, transition: 'all 0.2s', minHeight: '48px', fontWeight: i === q.correct && state.answered !== null ? 600 : 400 }}
-                  >
-                    <span style={{ flexShrink: 0, width: 28, height: 28, borderRadius: '50%', background: state.answered !== null && i === q.correct ? 'var(--accent)' : 'var(--surface-2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700 }}>
-                      {state.answered !== null && i === q.correct ? '✓' : state.answered === i && !state.isCorrect ? '✗' : String.fromCharCode(65 + i)}
-                    </span>
-                    {opt}
->>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
                   </button>
                 );
               })}
             </div>
 
-<<<<<<< HEAD
             <AnimatePresence>
               {state.answered !== null && (
                 <motion.div initial={{ opacity: 0, height: 0, marginTop: 0 }} animate={{ opacity: 1, height: 'auto', marginTop: '2.5rem' }} style={{ overflow: 'hidden' }}>
                   <div style={{ background: state.isCorrect ? '#EFFDF4' : '#FEF2F2', borderLeft: `6px solid ${state.isCorrect ? '#10B981' : '#EF4444'}`, borderRadius: '16px', padding: '1.5rem 2rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                      <span style={{ fontSize: '1.5rem' }}>{state.isCorrect ? '🎯' : '💡'}</span>
+                      <span style={{ fontSize: '1.5rem' }}>{state.isCorrect ? 'ðŸŽ¯' : 'ðŸ’¡'}</span>
                       <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', fontWeight: 800, color: state.isCorrect ? '#065F46' : '#991B1B', margin: 0 }}>
                         {state.isCorrect ? 'Spot On!' : 'Not Quite Right'}
                       </h4>
@@ -274,7 +199,7 @@ export default function ElectionQuiz() {
                       onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
                       onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
                     >
-                      {state.current + 1 >= QUESTIONS.length ? 'View Final Results 🏆' : 'Next Question ➔'}
+                      {state.current + 1 >= QUESTIONS.length ? 'View Final Results ðŸ†' : 'Next Question âž”'}
                     </button>
                   </div>
                 </motion.div>
@@ -282,25 +207,6 @@ export default function ElectionQuiz() {
             </AnimatePresence>
 
           </div>
-=======
-            {state.answered !== null && (
-              <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} style={{ marginTop: '1.25rem', background: state.isCorrect ? 'rgba(46,204,113,0.12)' : 'rgba(229,62,62,0.08)', borderLeft: `4px solid ${state.isCorrect ? 'var(--accent)' : 'var(--error)'}`, borderRadius: '0 var(--radius) var(--radius) 0', padding: '0.875rem 1rem' }}>
-                <div style={{ fontWeight: 700, fontFamily: 'var(--font-heading)', color: state.isCorrect ? 'var(--accent-dark)' : 'var(--error)', marginBottom: '0.3rem' }}>
-                  {state.isCorrect ? '✅ Correct!' : '❌ Incorrect'}
-                </div>
-                <p style={{ fontSize: '0.875rem', color: 'var(--text-primary)', lineHeight: 1.6 }}>{q.explanation}</p>
-              </motion.div>
-            )}
-          </div>
-
-          {state.answered !== null && (
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ marginTop: '1rem', textAlign: 'right' }}>
-              <button className="btn btn-primary" onClick={() => dispatch({ type: 'NEXT' })}>
-                {state.current + 1 >= QUESTIONS.length ? '🏆 See Results' : 'Next Question →'}
-              </button>
-            </motion.div>
-          )}
->>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
         </motion.div>
       </AnimatePresence>
     </div>

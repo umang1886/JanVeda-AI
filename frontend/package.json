@@ -20,11 +20,7 @@
     "date-fns": "^4.1.0",
     "framer-motion": "^12.38.0",
     "i18next": "^26.0.8",
-<<<<<<< HEAD
     "react-i18next": "^17.0.6",
-=======
-    "react-i18next": "^17.0.4",
->>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
     "react-router-dom": "^7.14.2",
     "zustand": "^5.0.12"
   }
