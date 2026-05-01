@@ -42,10 +42,17 @@ function quizReducer(state, action) {
 
 function getBadge(score, total) {
   const pct = score / total;
+<<<<<<< HEAD
   if (pct === 1) return { label: '🏆 Civic Champion!', desc: 'Flawless! You know exactly how the Indian democratic engine works.', color: '#10B981', bg: 'linear-gradient(135deg, #10B981, #059669)' };
   if (pct >= 0.8) return { label: '🥇 Informed Voter!', desc: 'Incredible score. You are highly educated on your electoral rights.', color: '#3B82F6', bg: 'linear-gradient(135deg, #3B82F6, #2563EB)' };
   if (pct >= 0.6) return { label: '🥈 Good Citizen!', desc: 'Solid attempt! But there is always more to learn about your voting system.', color: '#F59E0B', bg: 'linear-gradient(135deg, #F59E0B, #D97706)' };
   return { label: '🥉 Keep Learning!', desc: 'You need to brush up on your civic knowledge. Knowledge is power!', color: '#64748B', bg: 'linear-gradient(135deg, #64748B, #475569)' };
+=======
+  if (pct === 1) return { label: '🏆 Civic Champion!', color: 'var(--primary)' };
+  if (pct >= 0.8) return { label: '🥇 Informed Voter!', color: 'var(--accent-dark)' };
+  if (pct >= 0.6) return { label: '🥈 Good Citizen!', color: 'var(--secondary-light)' };
+  return { label: '🥉 Keep Learning!', color: 'var(--text-secondary)' };
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
 }
 
 export default function ElectionQuiz() {
@@ -57,13 +64,18 @@ export default function ElectionQuiz() {
   React.useEffect(() => {
     if (state.finished) {
       const score = state.score / QUESTIONS.length;
+<<<<<<< HEAD
       confetti({ particleCount: score >= 0.8 ? 250 : 100, spread: 100, origin: { y: 0.6 }, colors: ['#FF6600', '#2563EB', '#10B981', '#FFFFFF'] });
+=======
+      confetti({ particleCount: score >= 0.8 ? 150 : 60, spread: 70, colors: ['#FF6B35', '#1B3A6B', '#2ECC71', '#fff'] });
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
     }
   }, [state.finished]);
 
   if (state.finished) {
     const badge = getBadge(state.score, QUESTIONS.length);
     return (
+<<<<<<< HEAD
       <div style={{ maxWidth: 640, margin: '4rem auto', padding: '1rem', textAlign: 'center' }}>
         <motion.div initial={{ scale: 0.9, opacity: 0, y: 20 }} animate={{ scale: 1, opacity: 1, y: 0 }} transition={{ type: 'spring', bounce: 0.5 }} style={{ background: 'white', borderRadius: '32px', overflow: 'hidden', boxShadow: '0 25px 50px rgba(0,0,0,0.1)' }}>
           <div style={{ background: badge.bg, padding: '4rem 2rem', color: 'white' }}>
@@ -90,12 +102,29 @@ export default function ElectionQuiz() {
                 💬 Explore AI Chatbot
               </a>
             </div>
+=======
+      <div style={{ maxWidth: 540, margin: '2rem auto', padding: '1rem', textAlign: 'center' }}>
+        <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="card" style={{ borderTop: `4px solid ${badge.color}` }}>
+          <div style={{ fontSize: '4rem', margin: '0.5rem 0' }}>{badge.label.split(' ')[0]}</div>
+          <h2 style={{ fontFamily: 'var(--font-heading)', color: 'var(--secondary)', margin: '0.5rem 0' }}>{badge.label.slice(2)}</h2>
+          <div style={{ fontSize: '3rem', fontFamily: 'var(--font-heading)', fontWeight: 700, color: badge.color, margin: '1rem 0' }}>{state.score}/{QUESTIONS.length}</div>
+          <div className="progress-bar" style={{ marginBottom: '1.5rem' }}>
+            <div className="progress-fill" style={{ width: `${(state.score / QUESTIONS.length) * 100}%` }} />
+          </div>
+          <p style={{ color: 'var(--text-secondary)', marginBottom: '1.5rem' }}>
+            {state.score === QUESTIONS.length ? 'Perfect score! You\'re a civic knowledge expert!' : `You got ${state.score} out of ${QUESTIONS.length} questions correct. Keep learning!`}
+          </p>
+          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+            <button className="btn btn-primary" onClick={() => dispatch({ type: 'RESTART' })}>🔄 Try Again</button>
+            <a href="/chatbot" className="btn btn-secondary">💬 Learn More</a>
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
           </div>
         </motion.div>
       </div>
     );
   }
 
+<<<<<<< HEAD
   // Active Quiz View
   return (
     <div style={{ maxWidth: 800, margin: '0 auto', padding: '3rem 1.5rem' }}>
@@ -174,11 +203,57 @@ export default function ElectionQuiz() {
                       {isRevealed && isCorrectAnswer ? '✓' : isRevealed && isSelected && !state.isCorrect ? '✗' : String.fromCharCode(65 + i)}
                     </div>
                     <span style={{ fontSize: '1.05rem', fontWeight: isRevealed && isCorrectAnswer ? 800 : 600, color }}>{opt}</span>
+=======
+  return (
+    <div style={{ maxWidth: 640, margin: '2rem auto', padding: '1rem' }}>
+      {/* Header + Progress */}
+      <div style={{ marginBottom: '1.5rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
+          <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--secondary)' }}>Quiz — Election Civic Knowledge</span>
+          <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--primary)', fontSize: '0.9rem' }}>{state.current + 1} / {QUESTIONS.length}</span>
+        </div>
+        <div className="progress-bar" role="progressbar" aria-valuenow={state.current + 1} aria-valuemin={1} aria-valuemax={QUESTIONS.length} aria-label={`Question ${state.current + 1} of ${QUESTIONS.length}`}>
+          <div className="progress-fill" style={{ width: `${pct}%` }} />
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.4rem', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+          <span>Score: {state.score} ✓</span>
+          <span>{QUESTIONS.length - state.current - 1} remaining</span>
+        </div>
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div key={q.id} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -30 }}>
+          <div className="card" style={{ borderTop: '4px solid var(--secondary)' }}>
+            <div className="badge badge-navy" style={{ marginBottom: '1rem' }}>Q{state.current + 1}</div>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', color: 'var(--secondary)', marginBottom: '1.5rem', lineHeight: 1.5 }}>{q.q}</h2>
+
+            <div role="radiogroup" aria-label="Answer options" style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+              {q.opts.map((opt, i) => {
+                let bg = 'var(--surface)', border = 'var(--surface-2)', color = 'var(--text-primary)';
+                if (state.answered !== null) {
+                  if (i === q.correct) { bg = 'rgba(46,204,113,0.15)'; border = 'var(--accent)'; color = 'var(--accent-dark)'; }
+                  else if (i === state.answered && !state.isCorrect) { bg = 'rgba(229,62,62,0.12)'; border = 'var(--error)'; color = 'var(--error)'; }
+                }
+                return (
+                  <button
+                    key={i}
+                    role="radio"
+                    aria-checked={state.answered === i}
+                    disabled={state.answered !== null}
+                    onClick={() => dispatch({ type: 'ANSWER', idx: i })}
+                    style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '0.875rem 1rem', background: bg, border: `2px solid ${border}`, borderRadius: 'var(--radius)', cursor: state.answered === null ? 'pointer' : 'default', textAlign: 'left', fontFamily: 'var(--font-body)', fontSize: '0.95rem', color, transition: 'all 0.2s', minHeight: '48px', fontWeight: i === q.correct && state.answered !== null ? 600 : 400 }}
+                  >
+                    <span style={{ flexShrink: 0, width: 28, height: 28, borderRadius: '50%', background: state.answered !== null && i === q.correct ? 'var(--accent)' : 'var(--surface-2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.8rem', fontWeight: 700 }}>
+                      {state.answered !== null && i === q.correct ? '✓' : state.answered === i && !state.isCorrect ? '✗' : String.fromCharCode(65 + i)}
+                    </span>
+                    {opt}
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
                   </button>
                 );
               })}
             </div>
 
+<<<<<<< HEAD
             <AnimatePresence>
               {state.answered !== null && (
                 <motion.div initial={{ opacity: 0, height: 0, marginTop: 0 }} animate={{ opacity: 1, height: 'auto', marginTop: '2.5rem' }} style={{ overflow: 'hidden' }}>
@@ -207,6 +282,25 @@ export default function ElectionQuiz() {
             </AnimatePresence>
 
           </div>
+=======
+            {state.answered !== null && (
+              <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} style={{ marginTop: '1.25rem', background: state.isCorrect ? 'rgba(46,204,113,0.12)' : 'rgba(229,62,62,0.08)', borderLeft: `4px solid ${state.isCorrect ? 'var(--accent)' : 'var(--error)'}`, borderRadius: '0 var(--radius) var(--radius) 0', padding: '0.875rem 1rem' }}>
+                <div style={{ fontWeight: 700, fontFamily: 'var(--font-heading)', color: state.isCorrect ? 'var(--accent-dark)' : 'var(--error)', marginBottom: '0.3rem' }}>
+                  {state.isCorrect ? '✅ Correct!' : '❌ Incorrect'}
+                </div>
+                <p style={{ fontSize: '0.875rem', color: 'var(--text-primary)', lineHeight: 1.6 }}>{q.explanation}</p>
+              </motion.div>
+            )}
+          </div>
+
+          {state.answered !== null && (
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ marginTop: '1rem', textAlign: 'right' }}>
+              <button className="btn btn-primary" onClick={() => dispatch({ type: 'NEXT' })}>
+                {state.current + 1 >= QUESTIONS.length ? '🏆 See Results' : 'Next Question →'}
+              </button>
+            </motion.div>
+          )}
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
         </motion.div>
       </AnimatePresence>
     </div>

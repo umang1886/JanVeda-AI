@@ -20,7 +20,7 @@ steps:
     args:
     - 'run'
     - 'deploy'
-    - 'janveda-api'
+    - 'janveda-backend'
     - '--image'
     - 'gcr.io/$PROJECT_ID/janveda-api'
     - '--region'
@@ -28,6 +28,8 @@ steps:
     - '--platform'
     - 'managed'
     - '--allow-unauthenticated'
+    - '--set-env-vars'
+    - 'GEMINI_API_KEY=$_GEMINI_API_KEY'
 
 images:
   - 'gcr.io/$PROJECT_ID/janveda-api'

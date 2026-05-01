@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+<<<<<<< HEAD
 import { useTranslation } from 'react-i18next';
+=======
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
 
 const FEATURES = [
   { to: '/timeline', icon: '📅', title: 'Election Timeline', desc: 'See all 7 phases of the process with real-time progress.', color: '#2563EB' },
@@ -13,7 +16,10 @@ const FEATURES = [
 ];
 
 export default function Home() {
+<<<<<<< HEAD
   const { t } = useTranslation();
+=======
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
   return (
     <div style={{ overflowX: 'hidden' }}>
       
@@ -44,6 +50,7 @@ export default function Home() {
             {/* Left Content */}
             <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }} style={{ flex: '1 1 500px' }}>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,255,255,0.15)', border: '1px solid rgba(255,255,255,0.3)', borderRadius: 'var(--radius-full)', padding: '0.4rem 1.25rem', marginBottom: '1.5rem' }}>
+<<<<<<< HEAD
                 <span style={{ fontSize: '0.85rem', fontFamily: 'var(--font-heading)', fontWeight: 600, color: 'white' }}>{t('greeting')}</span>
               </div>
 
@@ -55,14 +62,34 @@ export default function Home() {
 
               <p style={{ fontSize: '1.15rem', color: 'rgba(255,255,255,0.9)', maxWidth: '500px', marginBottom: '2.5rem', lineHeight: 1.6 }}>
                 {t('subheading')}
+=======
+                <span style={{ fontSize: '0.85rem', fontFamily: 'var(--font-heading)', fontWeight: 600, color: 'white' }}>Empowering Citizens 🇮🇳</span>
+              </div>
+
+              <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.5rem, 6vw, 4.2rem)', fontWeight: 800, color: 'white', lineHeight: 1.1, marginBottom: '1.5rem' }}>
+                We are building <br />
+                knowledge for your <br />
+                <span style={{ color: '#60A5FA' }}>electoral voice</span>
+              </h1>
+
+              <p style={{ fontSize: '1.15rem', color: 'rgba(255,255,255,0.9)', maxWidth: '500px', marginBottom: '2.5rem', lineHeight: 1.6 }}>
+                JanVeda AI simplifies the entire voting process. Find your booth, practice on our EVM simulator, and get instant answers from our AI assistant.
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
               </p>
 
               <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                 <Link to="/simulator" className="btn btn-primary" style={{ background: 'var(--primary)', color: 'white', padding: '1rem 2rem', fontSize: '1.1rem', boxShadow: '0 8px 20px rgba(255, 102, 0, 0.4)' }}>
+<<<<<<< HEAD
                   {t('start')}
                 </Link>
                 <Link to="/chatbot" className="btn" style={{ background: 'rgba(255,255,255,0.15)', color: 'white', border: '1px solid rgba(255,255,255,0.3)', padding: '1rem 2rem', fontSize: '1.1rem' }}>
                   {t('chatbot')}
+=======
+                  Start Free Trial →
+                </Link>
+                <Link to="/chatbot" className="btn" style={{ background: 'rgba(255,255,255,0.15)', color: 'white', border: '1px solid rgba(255,255,255,0.3)', padding: '1rem 2rem', fontSize: '1.1rem' }}>
+                  or ask AI 💬
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
                 </Link>
               </div>
             </motion.div>

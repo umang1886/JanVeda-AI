@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+<<<<<<< HEAD
 import { useTranslation } from 'react-i18next';
 
 const getNavLinks = (t) => [
@@ -11,12 +12,26 @@ const getNavLinks = (t) => [
   { to: '/quiz', label: t('nav_quiz') || 'Quiz', icon: '🏆' },
   { to: '/glossary', label: t('nav_glossary') || 'Glossary', icon: '📖' },
   { to: '/chatbot', label: t('nav_chatbot') || 'AI Help', icon: '💬' },
+=======
+
+const NAV_LINKS = [
+  { to: '/timeline', label: 'Timeline', icon: '📅' },
+  { to: '/booth-finder', label: 'Find Booth', icon: '📍' },
+  { to: '/first-time-voter', label: 'First Timer', icon: '🗳️' },
+  { to: '/simulator', label: 'EVM Sim', icon: '🖧' },
+  { to: '/quiz', label: 'Quiz', icon: '🏆' },
+  { to: '/glossary', label: 'Glossary', icon: '📖' },
+  { to: '/chatbot', label: 'AI Help', icon: '💬' },
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const location = useLocation();
+<<<<<<< HEAD
   const { t, i18n } = useTranslation();
+=======
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
 
   // Close mobile menu on route change
   React.useEffect(() => setOpen(false), [location.pathname]);
@@ -83,7 +98,11 @@ export default function Navbar() {
           }}
           className="desktop-nav"
         >
+<<<<<<< HEAD
           {getNavLinks(t).map(link => (
+=======
+          {NAV_LINKS.map(link => (
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
             <li key={link.to}>
               <NavLink
                 to={link.to}
@@ -108,6 +127,7 @@ export default function Navbar() {
               </NavLink>
             </li>
           ))}
+<<<<<<< HEAD
           <li style={{ marginLeft: "1rem" }}>
             <select
               style={{
@@ -127,6 +147,8 @@ export default function Navbar() {
               <option value="gu">ગુજરાતી</option>
             </select>
           </li>
+=======
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
         </ul>
 
         {/* Mobile hamburger */}
@@ -168,7 +190,11 @@ export default function Navbar() {
             }}
           >
             <ul style={{ padding: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+<<<<<<< HEAD
               {getNavLinks(t).map(link => (
+=======
+              {NAV_LINKS.map(link => (
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
                 <li key={link.to}>
                   <NavLink
                     to={link.to}

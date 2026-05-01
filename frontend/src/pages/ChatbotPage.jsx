@@ -3,6 +3,7 @@ import Chatbot from '../components/chatbot/Chatbot';
 
 export default function ChatbotPage() {
   return (
+<<<<<<< HEAD
     <div style={{ 
       minHeight: 'calc(100vh - var(--nav-height, 80px))', 
       padding: '1rem',
@@ -28,6 +29,10 @@ export default function ChatbotPage() {
       }}>
         <Chatbot />
       </div>
+=======
+    <div style={{ minHeight: 'calc(100vh - 140px)', padding: '2rem 1rem' }}>
+      <Chatbot />
+>>>>>>> d52fecbaa91d87347bff416a3e399850057e2176
     </div>
   );
 }
