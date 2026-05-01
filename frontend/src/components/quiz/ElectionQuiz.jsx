@@ -10,18 +10,18 @@ const QUESTIONS = [
   { id: 5, q: 'What app can citizens use to report election violations?', opts: ['Voter ID App', 'cVIGIL', 'UMANG', 'DigiLocker'], correct: 1, explanation: 'cVIGIL is the ECI app for citizens to report election violations. Flying Squads respond within 100 minutes.' },
   { id: 6, q: 'What form is used for new voter registration?', opts: ['Form 1', 'Form 4', 'Form 6', 'Form 8'], correct: 2, explanation: 'Form 6 is used for new voter enrollment. Form 8 is for corrections, Form 7 for deletion requests.' },
   { id: 7, q: 'Which finger gets the indelible ink during voting?', opts: ['Right index', 'Right thumb', 'Left index', 'Left thumb'], correct: 2, explanation: 'Indelible ink is applied on the left index finger. It contains Silver Nitrate and cannot be easily removed.' },
-  { id: 8, q: 'What does EPIC stand for?', opts: ['Election Photo ID Card', 'Electoral Photo Identity Card', 'Electronic Photo Identity Card', 'Elector Participation Identity Card'], correct: 1, explanation: 'EPIC stands for Elector\'s Photo Identity Card â€” the official voter ID issued by the Election Commission of India.' },
+  { id: 8, q: 'What does EPIC stand for?', opts: ['Election Photo ID Card', 'Electoral Photo Identity Card', 'Electronic Photo Identity Card', 'Elector Participation Identity Card'], correct: 1, explanation: 'EPIC stands for Elector\'s Photo Identity Card — the official voter ID issued by the Election Commission of India.' },
   { id: 9, q: 'How many days before election does campaigning have to stop?', opts: ['24 hours', '36 hours', '48 hours', '72 hours'], correct: 2, explanation: 'The \'silent period\' begins 48 hours before the start of polling. No rallies, speeches, or canvassing are allowed.' },
   { id: 10, q: 'What is the Model Code of Conduct?', opts: ['Rules for EVM testing', 'Guidelines for election campaigns & conduct', 'Voter registration rules', 'Counting day procedures'], correct: 1, explanation: 'The Model Code of Conduct (MCC) is a set of guidelines issued by ECI to regulate political parties and candidates during elections.' },
   { id: 11, q: 'Which article of the Constitution establishes the Election Commission of India?', opts: ['Article 226', 'Article 300', 'Article 324', 'Article 356'], correct: 2, explanation: 'Article 324 of the Indian Constitution establishes the Election Commission of India and vests it with authority over elections.' },
   { id: 12, q: 'Can an NRI (Non-Resident Indian) vote in Indian elections?', opts: ['No, NRIs cannot vote', 'Yes, but must physically be present in India', 'Yes, via postal ballot', 'Yes, via online voting'], correct: 1, explanation: 'NRIs can register as overseas electors and vote, but must physically be present at their designated polling booth in India. No postal ballot for NRIs yet.' },
   { id: 13, q: 'What is a by-election?', opts: ['An election in rural areas', 'An election held when a seat falls vacant mid-term', 'A second round of elections if no majority', 'An election for Rajya Sabha'], correct: 1, explanation: 'A by-election (or bye-election) is held for a single constituency when the seat falls vacant due to death, resignation, or disqualification of the elected member.' },
   { id: 14, q: 'Who is the Booth Level Officer (BLO)?', opts: ['The Presiding Officer on election day', 'A government official who manages voter rolls for a booth area', 'A police officer at the polling booth', 'A candidate\'s representative at the booth'], correct: 1, explanation: 'A BLO is a grassroots government official (often a school teacher) responsible for maintaining the voter roll accuracy for their assigned booth area.' },
-  { id: 15, q: 'Is your vote truly secret in India?', opts: ['No â€” officers can see your choice', 'Yes â€” EVM records only counts, not who voted for whom', 'Only for computerized booths', 'No â€” your EPIC number is linked to your vote'], correct: 1, explanation: 'Your vote is completely secret. EVMs only record vote counts â€” they do not link individual voters to their choices. It is the law that nobody can ask you how you voted.' },
-  { id: 16, q: 'What is the spending limit for a Lok Sabha candidate?', opts: ['â‚¹10 lakh', 'â‚¹25 lakh', 'â‚¹70â€“95 lakh', 'â‚¹5 crore'], correct: 2, explanation: 'The ECI-set expenditure limit for Lok Sabha candidates varies from â‚¹70 lakh to â‚¹95 lakh depending on the state. Violations can lead to disqualification.' },
+  { id: 15, q: 'Is your vote truly secret in India?', opts: ['No — officers can see your choice', 'Yes — EVM records only counts, not who voted for whom', 'Only for computerized booths', 'No — your EPIC number is linked to your vote'], correct: 1, explanation: 'Your vote is completely secret. EVMs only record vote counts — they do not link individual voters to their choices. It is the law that nobody can ask you how you voted.' },
+  { id: 16, q: 'What is the spending limit for a Lok Sabha candidate?', opts: ['₹10 lakh', '₹25 lakh', '₹70–95 lakh', '₹5 crore'], correct: 2, explanation: 'The ECI-set expenditure limit for Lok Sabha candidates varies from ₹70 lakh to ₹95 lakh depending on the state. Violations can lead to disqualification.' },
   { id: 17, q: 'When was the VVPAT machine made mandatory in all Indian elections?', opts: ['2004', '2009', '2014', '2019'], correct: 3, explanation: 'VVPAT machines were made mandatory in all polling stations across India starting from the 2019 Lok Sabha General Elections.' },
-  { id: 18, q: 'What is the National Voters\' Day and when is it?', opts: ['March 1 â€” to promote voter awareness', 'January 25 â€” celebrating ECI\'s establishment', 'November 26 â€” celebrating the Constitution', 'August 15 â€” Independence Day'], correct: 1, explanation: 'January 25th is National Voters\' Day, celebrating the establishment of the Election Commission of India on January 25, 1950. It promotes voter awareness.' },
-  { id: 19, q: 'What penalty can an employer face for denying employees leave to vote?', opts: ['No penalty', 'â‚¹500 fine', 'Criminal prosecution under election law', 'â‚¹100 fine'], correct: 2, explanation: 'Employers are required by law to grant employees paid leave on election day. Denying this leave can result in criminal prosecution under election law.' },
+  { id: 18, q: 'What is the National Voters\' Day and when is it?', opts: ['March 1 — to promote voter awareness', 'January 25 — celebrating ECI\'s establishment', 'November 26 — celebrating the Constitution', 'August 15 — Independence Day'], correct: 1, explanation: 'January 25th is National Voters\' Day, celebrating the establishment of the Election Commission of India on January 25, 1950. It promotes voter awareness.' },
+  { id: 19, q: 'What penalty can an employer face for denying employees leave to vote?', opts: ['No penalty', '₹500 fine', 'Criminal prosecution under election law', '₹100 fine'], correct: 2, explanation: 'Employers are required by law to grant employees paid leave on election day. Denying this leave can result in criminal prosecution under election law.' },
   { id: 20, q: 'How many Lok Sabha constituencies are there in India?', opts: ['400', '452', '543', '600'], correct: 2, explanation: 'India has 543 Lok Sabha constituencies. Each constituency elects one Member of Parliament (MP) by first-past-the-post voting.' },
 ];
 
@@ -42,10 +42,10 @@ function quizReducer(state, action) {
 
 function getBadge(score, total) {
   const pct = score / total;
-  if (pct === 1) return { label: 'ðŸ† Civic Champion!', desc: 'Flawless! You know exactly how the Indian democratic engine works.', color: '#10B981', bg: 'linear-gradient(135deg, #10B981, #059669)' };
-  if (pct >= 0.8) return { label: 'ðŸ¥‡ Informed Voter!', desc: 'Incredible score. You are highly educated on your electoral rights.', color: '#3B82F6', bg: 'linear-gradient(135deg, #3B82F6, #2563EB)' };
-  if (pct >= 0.6) return { label: 'ðŸ¥ˆ Good Citizen!', desc: 'Solid attempt! But there is always more to learn about your voting system.', color: '#F59E0B', bg: 'linear-gradient(135deg, #F59E0B, #D97706)' };
-  return { label: 'ðŸ¥‰ Keep Learning!', desc: 'You need to brush up on your civic knowledge. Knowledge is power!', color: '#64748B', bg: 'linear-gradient(135deg, #64748B, #475569)' };
+  if (pct === 1) return { label: '🏆 Civic Champion!', desc: 'Flawless! You know exactly how the Indian democratic engine works.', color: '#10B981', bg: 'linear-gradient(135deg, #10B981, #059669)' };
+  if (pct >= 0.8) return { label: '🥇 Informed Voter!', desc: 'Incredible score. You are highly educated on your electoral rights.', color: '#3B82F6', bg: 'linear-gradient(135deg, #3B82F6, #2563EB)' };
+  if (pct >= 0.6) return { label: '🥈 Good Citizen!', desc: 'Solid attempt! But there is always more to learn about your voting system.', color: '#F59E0B', bg: 'linear-gradient(135deg, #F59E0B, #D97706)' };
+  return { label: '🥉 Keep Learning!', desc: 'You need to brush up on your civic knowledge. Knowledge is power!', color: '#64748B', bg: 'linear-gradient(135deg, #64748B, #475569)' };
 }
 
 export default function ElectionQuiz() {
@@ -84,10 +84,10 @@ export default function ElectionQuiz() {
 
             <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               <button onClick={() => dispatch({ type: 'RESTART' })} style={{ padding: '1rem 2rem', background: '#F1F5F9', border: 'none', borderRadius: '16px', color: '#1E293B', fontWeight: 800, fontSize: '1rem', cursor: 'pointer', transition: 'all 0.2s' }} onMouseEnter={e => e.currentTarget.style.background = '#E2E8F0'} onMouseLeave={e => e.currentTarget.style.background = '#F1F5F9'}>
-                ðŸ”„ Retake Quiz
+                🔄 Retake Quiz
               </button>
               <a href="/chatbot" style={{ textDecoration: 'none', padding: '1rem 2rem', background: badge.color, border: 'none', borderRadius: '16px', color: 'white', fontWeight: 800, fontSize: '1rem', cursor: 'pointer', transition: 'all 0.2s', boxShadow: `0 10px 20px ${badge.color}40` }}>
-                ðŸ’¬ Explore AI Chatbot
+                💬 Explore AI Chatbot
               </a>
             </div>
           </div>
@@ -114,7 +114,7 @@ export default function ElectionQuiz() {
           <div style={{ width: '1px', background: '#E2E8F0' }} />
           <div>
             <div style={{ fontSize: '0.75rem', color: '#94A3B8', fontWeight: 800, textTransform: 'uppercase' }}>Score</div>
-            <div style={{ fontSize: '1.2rem', fontFamily: 'var(--font-heading)', fontWeight: 800, color: '#10B981' }}>{state.score} âœ“</div>
+            <div style={{ fontSize: '1.2rem', fontFamily: 'var(--font-heading)', fontWeight: 800, color: '#10B981' }}>{state.score} ✓</div>
           </div>
         </div>
       </div>
@@ -171,7 +171,7 @@ export default function ElectionQuiz() {
                       width: 32, height: 32, borderRadius: '50%', background: isRevealed && isCorrectAnswer ? '#10B981' : isSelected && !state.isCorrect ? '#EF4444' : '#F1F5F9', 
                       color: isRevealed && (isCorrectAnswer || isSelected) ? 'white' : '#64748B', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem', fontWeight: 800, flexShrink: 0 
                     }}>
-                      {isRevealed && isCorrectAnswer ? 'âœ“' : isRevealed && isSelected && !state.isCorrect ? 'âœ—' : String.fromCharCode(65 + i)}
+                      {isRevealed && isCorrectAnswer ? '✓' : isRevealed && isSelected && !state.isCorrect ? '✗' : String.fromCharCode(65 + i)}
                     </div>
                     <span style={{ fontSize: '1.05rem', fontWeight: isRevealed && isCorrectAnswer ? 800 : 600, color }}>{opt}</span>
                   </button>
@@ -184,7 +184,7 @@ export default function ElectionQuiz() {
                 <motion.div initial={{ opacity: 0, height: 0, marginTop: 0 }} animate={{ opacity: 1, height: 'auto', marginTop: '2.5rem' }} style={{ overflow: 'hidden' }}>
                   <div style={{ background: state.isCorrect ? '#EFFDF4' : '#FEF2F2', borderLeft: `6px solid ${state.isCorrect ? '#10B981' : '#EF4444'}`, borderRadius: '16px', padding: '1.5rem 2rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                      <span style={{ fontSize: '1.5rem' }}>{state.isCorrect ? 'ðŸŽ¯' : 'ðŸ’¡'}</span>
+                      <span style={{ fontSize: '1.5rem' }}>{state.isCorrect ? '🎯' : '💡'}</span>
                       <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', fontWeight: 800, color: state.isCorrect ? '#065F46' : '#991B1B', margin: 0 }}>
                         {state.isCorrect ? 'Spot On!' : 'Not Quite Right'}
                       </h4>
@@ -199,7 +199,7 @@ export default function ElectionQuiz() {
                       onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
                       onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
                     >
-                      {state.current + 1 >= QUESTIONS.length ? 'View Final Results ðŸ†' : 'Next Question âž”'}
+                      {state.current + 1 >= QUESTIONS.length ? 'View Final Results 🏆' : 'Next Question ➔'}
                     </button>
                   </div>
                 </motion.div>

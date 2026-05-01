@@ -3,17 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import axios from 'axios';
 
 const MOCK_BOOTHS = {
-  '110001': [{ id: 1, name: 'Govt. Primary School, Connaught Place', address: 'Block A, Connaught Place, New Delhi 110001', ward: 'Ward 1 â€” New Delhi', distance: '0.4 km', voters: 1247, mapUrl: 'https://maps.google.com/?q=28.6304,77.2177' }],
-  '400001': [{ id: 2, name: 'Municipal School No.3, Fort Area', address: 'D.N. Road, Fort, Mumbai 400001', ward: 'Ward 227 â€” Colaba', distance: '0.3 km', voters: 983, mapUrl: 'https://maps.google.com/?q=18.9322,72.8493' }],
-  '600001': [{ id: 3, name: 'Government Higher Secondary School', address: 'Anna Salai, Chennai 600001', ward: 'Ward 112 â€” Thousand Lights', distance: '0.6 km', voters: 1109, mapUrl: 'https://maps.google.com/?q=13.0827,80.2707' }],
+  '110001': [{ id: 1, name: 'Govt. Primary School, Connaught Place', address: 'Block A, Connaught Place, New Delhi 110001', ward: 'Ward 1 — New Delhi', distance: '0.4 km', voters: 1247, mapUrl: 'https://maps.google.com/?q=28.6304,77.2177' }],
+  '400001': [{ id: 2, name: 'Municipal School No.3, Fort Area', address: 'D.N. Road, Fort, Mumbai 400001', ward: 'Ward 227 — Colaba', distance: '0.3 km', voters: 983, mapUrl: 'https://maps.google.com/?q=18.9322,72.8493' }],
+  '600001': [{ id: 3, name: 'Government Higher Secondary School', address: 'Anna Salai, Chennai 600001', ward: 'Ward 112 — Thousand Lights', distance: '0.6 km', voters: 1109, mapUrl: 'https://maps.google.com/?q=13.0827,80.2707' }],
   '700001': [{ id: 4, name: 'Dalhousie Primary School', address: 'B.B.D. Bagh, Kolkata 700001', ward: 'Ward 45', distance: '0.5 km', voters: 876, mapUrl: 'https://maps.google.com/?q=22.5726,88.3639' }],
 };
 
 const FEATURES = [
-  { icon: 'â™¿', label: 'Wheelchair Ramp' },
-  { icon: 'ðŸš°', label: 'Drinking Water' },
-  { icon: 'ðŸ¥', label: 'Medical Kit' },
-  { icon: 'ðŸ‘®', label: 'Police Security' },
+  { icon: '♿', label: 'Wheelchair Ramp' },
+  { icon: '🚰', label: 'Drinking Water' },
+  { icon: '🏥', label: 'Medical Kit' },
+  { icon: '👮', label: 'Police Security' },
 ];
 
 export default function BoothFinder() {
@@ -62,9 +62,9 @@ export default function BoothFinder() {
   };
 
   const getCrowdTheme = (lvl) => {
-    if (lvl === 0) return { label: 'ðŸŸ¢ Low Crowd', color: '#10B981', bg: 'rgba(16,185,129,0.1)' };
-    if (lvl === 1) return { label: 'ðŸŸ¡ Moderate', color: '#F59E0B', bg: 'rgba(245,158,11,0.1)' };
-    return { label: 'ðŸ”´ Heavy Traffic', color: '#EF4444', bg: 'rgba(239,68,68,0.1)' };
+    if (lvl === 0) return { label: '🟢 Low Crowd', color: '#10B981', bg: 'rgba(16,185,129,0.1)' };
+    if (lvl === 1) return { label: '🟡 Moderate', color: '#F59E0B', bg: 'rgba(245,158,11,0.1)' };
+    return { label: '🔴 Heavy Traffic', color: '#EF4444', bg: 'rgba(239,68,68,0.1)' };
   };
 
   return (
@@ -74,7 +74,7 @@ export default function BoothFinder() {
       <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center', marginBottom: '3rem', position: 'relative' }}>
         <div style={{ position: 'absolute', top: -50, left: '50%', transform: 'translateX(-50%)', width: 250, height: 250, background: 'radial-gradient(circle, rgba(37,99,235,0.08) 0%, transparent 70%)', zIndex: -1 }} />
         <div style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 70, height: 70, borderRadius: '20px', background: 'linear-gradient(135deg, #FF6600, #FF8C42)', color: 'white', fontSize: '2rem', marginBottom: '1rem', boxShadow: '0 10px 25px rgba(255,102,0,0.3)' }}>
-          ðŸ“
+          📍
         </div>
         <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', fontWeight: 900, color: '#0D3E96', letterSpacing: '-0.02em', marginBottom: '0.5rem' }}>Find Your Polling Booth</h1>
         <p style={{ color: 'var(--text-secondary)', fontSize: '1.05rem', maxWidth: 500, margin: '0 auto', lineHeight: 1.6 }}>Track live wait times, verify accessibility features, and get instant directions to your designated electronic voting center.</p>
@@ -92,7 +92,7 @@ export default function BoothFinder() {
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <label htmlFor="pincode-input" style={{ fontFamily: 'var(--font-heading)', fontSize: '0.9rem', fontWeight: 700, color: '#1E293B', marginBottom: '0.5rem' }}>Postal PIN Code <span style={{ color: '#EF4444' }}>*</span></label>
               <div style={{ position: 'relative' }}>
-                <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', fontSize: '1.2rem', color: '#94A3B8' }}>ðŸ“®</span>
+                <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', fontSize: '1.2rem', color: '#94A3B8' }}>📮</span>
                 <input
                   id="pincode-input"
                   type="text"
@@ -106,14 +106,14 @@ export default function BoothFinder() {
                   onBlur={e => { e.target.style.borderColor = '#E2E8F0'; e.target.style.boxShadow = 'none' }}
                 />
               </div>
-              {error && <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} style={{ color: '#EF4444', fontSize: '0.85rem', marginTop: '0.5rem', fontWeight: 600 }}>âš ï¸ {error}</motion.div>}
+              {error && <motion.div initial={{ opacity: 0, y: -5 }} animate={{ opacity: 1, y: 0 }} style={{ color: '#EF4444', fontSize: '0.85rem', marginTop: '0.5rem', fontWeight: 600 }}>⚠️ {error}</motion.div>}
             </div>
 
             {/* EPIC Input */}
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <label htmlFor="ep-input" style={{ fontFamily: 'var(--font-heading)', fontSize: '0.9rem', fontWeight: 700, color: '#1E293B', marginBottom: '0.5rem' }}>Voter EPIC Number <span style={{ color: '#94A3B8', fontWeight: 500 }}>(Optional)</span></label>
               <div style={{ position: 'relative' }}>
-                <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', fontSize: '1.2rem', color: '#94A3B8' }}>ðŸªª</span>
+                <span style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', fontSize: '1.2rem', color: '#94A3B8' }}>🪪</span>
                 <input
                   id="ep-input"
                   type="text"
@@ -136,9 +136,9 @@ export default function BoothFinder() {
             style={{ width: '100%', marginTop: '2rem', padding: '1.1rem', background: pincode.length === 6 ? 'linear-gradient(135deg, #0D3E96, #2563EB)' : '#CBD5E1', color: 'white', border: 'none', borderRadius: '14px', fontSize: '1.1rem', fontFamily: 'var(--font-heading)', fontWeight: 700, cursor: pincode.length === 6 && !loading ? 'pointer' : 'not-allowed', transition: 'all 0.2s', boxShadow: pincode.length === 6 ? '0 10px 20px rgba(37,99,235,0.25)' : 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
           >
           {loading ? (
-            <><span style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}>â³</span> Searching secure database...</>
+            <><span style={{ display: 'inline-block', animation: 'spin 1s linear infinite' }}>⏳</span> Searching secure database...</>
           ) : (
-            <><span>ðŸ”</span> Locate Safe Polling Booth</>
+            <><span>🔍</span> Locate Safe Polling Booth</>
           )}
         </button>
       </form>
@@ -172,11 +172,11 @@ export default function BoothFinder() {
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
                         <div>
                           <div style={{ background: theme.bg, color: theme.color, padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.8rem', fontWeight: 800, fontFamily: 'var(--font-heading)', display: 'inline-block', marginBottom: '0.8rem', letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-                            {theme.label} â€¢ ~{b.waitTime} Min Wait
+                            {theme.label} • ~{b.waitTime} Min Wait
                           </div>
                           <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', color: '#1E293B', fontWeight: 800, marginBottom: '0.5rem' }}>{b.name}</h3>
                           <p style={{ color: '#64748B', display: 'flex', alignItems: 'flex-start', gap: '5px', fontSize: '0.95rem', lineHeight: 1.5, maxWidth: '400px' }}>
-                            <span style={{flexShrink: 0, marginTop: '2px'}}>ðŸ“«</span> {b.address}
+                            <span style={{flexShrink: 0, marginTop: '2px'}}>📫</span> {b.address}
                           </p>
                         </div>
                         <div style={{ background: '#F8FAFF', border: '1px solid #E2E8F0', padding: '1rem', borderRadius: '16px', minWidth: '150px' }}>
@@ -204,7 +204,7 @@ export default function BoothFinder() {
                     {/* Action Bar / Map link */}
                     <div style={{ background: '#F8FAFF', borderTop: '1px solid #E2E8F0', padding: '1.5rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
                       <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                        <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#E0E7FF', color: '#4F46E5', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>ðŸ˜ï¸</div>
+                        <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#E0E7FF', color: '#4F46E5', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>🏘️</div>
                         <div>
                           <div style={{ fontSize: '0.75rem', color: '#64748B', fontWeight: 700, textTransform: 'uppercase' }}>Designated Ward</div>
                           <div style={{ fontSize: '0.95rem', fontWeight: 600, color: '#1E293B', fontFamily: 'var(--font-heading)' }}>{b.ward}</div>
@@ -220,7 +220,7 @@ export default function BoothFinder() {
                           onMouseOver={e => { e.currentTarget.style.borderColor = '#2563EB'; e.currentTarget.style.color = '#2563EB' }}
                           onMouseOut={e => { e.currentTarget.style.borderColor = '#E2E8F0'; e.currentTarget.style.color = '#1E293B' }}
                         >
-                          ðŸ—ºï¸ View on Maps
+                          🗺️ View on Maps
                         </a>
                         <a 
                           href={b.mapUrl + "&dirflg=d"} 
@@ -230,7 +230,7 @@ export default function BoothFinder() {
                           onMouseOver={e => { e.currentTarget.style.background = '#1D4ED8'; e.currentTarget.style.borderColor = '#1D4ED8' }}
                           onMouseOut={e => { e.currentTarget.style.background = '#2563EB'; e.currentTarget.style.borderColor = '#2563EB' }}
                         >
-                          ðŸ“ Navigate
+                          📍 Navigate
                         </a>
                       </div>
                     </div>
@@ -240,7 +240,7 @@ export default function BoothFinder() {
               
               {/* Mandatory Documents Banner */}
               <div style={{ background: 'linear-gradient(135deg, #1E293B, #0F172A)', borderRadius: '20px', padding: '2rem', display: 'flex', gap: '1.5rem', alignItems: 'center', color: 'white', marginTop: '3rem', boxShadow: '0 10px 30px rgba(0,0,0,0.15)' }}>
-                <div style={{ fontSize: '3rem' }}>ðŸ“„</div>
+                <div style={{ fontSize: '3rem' }}>📄</div>
                 <div>
                   <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', fontWeight: 800, marginBottom: '0.5rem', color: '#F8FAFF' }}>Don't forget your documents!</h4>
                   <p style={{ color: '#94A3B8', fontSize: '0.95rem', lineHeight: 1.6 }}>You must carry your <strong>Voter ID (EPIC)</strong> or an approved alternate photo ID (Aadhar, PAN, Driving License, Passport) to cast your vote. Mobile phones are <strong>strictly prohibited</strong> inside the voting compound.</p>
@@ -252,7 +252,7 @@ export default function BoothFinder() {
 
           {booths !== null && booths.length === 0 && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ textAlign: 'center', padding: '4rem 2rem', background: 'white', borderRadius: '24px', border: '1px solid #E2E8F0' }}>
-              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>ðŸ˜•</div>
+              <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>😕</div>
               <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.3rem', color: '#1E293B', marginBottom: '0.5rem' }}>No Polling Booths Found</h3>
               <p style={{ color: '#64748B' }}>We couldn't locate polling booths for Pincode {pincode}. Please verify the area code or check the Election Commission directory.</p>
             </motion.div>

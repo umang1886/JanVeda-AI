@@ -20,24 +20,24 @@ const TRANSITIONS = {
 };
 
 const CANDIDATES = [
-  { id: 1, name: 'Priya Sharma', party: 'Progress Party', symbol: 'ðŸŒ¸', btn: '1', color: '#3B82F6' },
-  { id: 2, name: 'Rahul Mehta', party: 'Unity Front', symbol: 'â­', btn: '2', color: '#8B5CF6' },
-  { id: 3, name: 'Kavita Patel', party: 'People\'s Alliance', symbol: 'ðŸŒ¿', btn: '3', color: '#10B981' },
-  { id: 4, name: 'Arjun Singh', party: 'Bharath Vikas', symbol: 'ðŸ”±', btn: '4', color: '#F59E0B' },
-  { id: 5, name: 'NOTA', party: 'None of the Above', symbol: 'âœ—', btn: '5', color: '#64748B' },
+  { id: 1, name: 'Priya Sharma', party: 'Progress Party', symbol: '🌸', btn: '1', color: '#3B82F6' },
+  { id: 2, name: 'Rahul Mehta', party: 'Unity Front', symbol: '⭐', btn: '2', color: '#8B5CF6' },
+  { id: 3, name: 'Kavita Patel', party: 'People\'s Alliance', symbol: '🌿', btn: '3', color: '#10B981' },
+  { id: 4, name: 'Arjun Singh', party: 'Bharath Vikas', symbol: '🔱', btn: '4', color: '#F59E0B' },
+  { id: 5, name: 'NOTA', party: 'None of the Above', symbol: '✗', btn: '5', color: '#64748B' },
 ];
 
 const PHASE_INFO = {
-  [PHASES.ENTER_BOOTH]: { emoji: 'ðŸšª', title: 'Enter the Polling Booth', desc: 'You approach the polling booth. The Presiding Officer checks your name on the electoral roll.', bg: 'linear-gradient(135deg, #1E3A8A, #3B82F6)' },
-  [PHASES.SHOW_ID]: { emoji: 'ðŸªª', title: 'Identity Verification', desc: 'Show your Voter ID (EPIC card) to Officer 1 to verify your identity.', bg: 'linear-gradient(135deg, #4C1D95, #8B5CF6)' },
-  [PHASES.SIGN_REGISTER]: { emoji: 'âœï¸', title: 'Sign the Register', desc: 'Officer 2 records your serial number in Register 17A and obtains your signature.', bg: 'linear-gradient(135deg, #064E3B, #10B981)' },
-  [PHASES.INDELIBLE_INK]: { emoji: 'ðŸ–Šï¸', title: 'Indelible Ink Application', desc: 'Officer 3 applies indelible silver nitrate ink on your left index finger.', bg: 'linear-gradient(135deg, #7F1D1D, #EF4444)' },
-  [PHASES.APPROACH_EVM]: { emoji: 'ðŸ—³ï¸', title: 'Approach the EVM', desc: 'Proceed to the secure voting compartment. The Presiding Officer enables the Ballot Unit.', bg: 'linear-gradient(135deg, #92400E, #F59E0B)' },
-  [PHASES.SELECT_CANDIDATE]: { emoji: 'ðŸ”˜', title: 'Cast Your Vote', desc: 'Press the blue button next to your chosen candidate. A red LED light will flash.', bg: 'linear-gradient(135deg, #0F172A, #334155)' },
-  [PHASES.CONFIRM_VOTE]: { emoji: 'â“', title: 'Confirm Your Choice', desc: 'Carefully confirm your selection before locking it into the machine.', bg: 'linear-gradient(135deg, #1E1B4B, #6366F1)' },
-  [PHASES.VVPAT_SLIP]: { emoji: 'ðŸ–¨ï¸', title: 'VVPAT Verification', desc: 'Look at the glass window! A paper slip drops into the sealed box, verifying what you just pressed.', bg: 'linear-gradient(135deg, #022C22, #059669)' },
-  [PHASES.VOTE_CAST]: { emoji: 'âœ…', title: 'Vote Successfully Cast', desc: 'A long beep sounds. Your democratic duty is done securely and anonymously.', bg: 'linear-gradient(135deg, #1D4ED8, #60A5FA)' },
-  [PHASES.CELEBRATION]: { emoji: 'ðŸŽ‰', title: 'Congratulations!', desc: 'You\'ve completed the simulation. You\'re now an informed voter!', bg: 'linear-gradient(135deg, #0D3E96, #2563EB)' },
+  [PHASES.ENTER_BOOTH]: { emoji: '🚪', title: 'Enter the Polling Booth', desc: 'You approach the polling booth. The Presiding Officer checks your name on the electoral roll.', bg: 'linear-gradient(135deg, #1E3A8A, #3B82F6)' },
+  [PHASES.SHOW_ID]: { emoji: '🪪', title: 'Identity Verification', desc: 'Show your Voter ID (EPIC card) to Officer 1 to verify your identity.', bg: 'linear-gradient(135deg, #4C1D95, #8B5CF6)' },
+  [PHASES.SIGN_REGISTER]: { emoji: '✍️', title: 'Sign the Register', desc: 'Officer 2 records your serial number in Register 17A and obtains your signature.', bg: 'linear-gradient(135deg, #064E3B, #10B981)' },
+  [PHASES.INDELIBLE_INK]: { emoji: '🖊️', title: 'Indelible Ink Application', desc: 'Officer 3 applies indelible silver nitrate ink on your left index finger.', bg: 'linear-gradient(135deg, #7F1D1D, #EF4444)' },
+  [PHASES.APPROACH_EVM]: { emoji: '🗳️', title: 'Approach the EVM', desc: 'Proceed to the secure voting compartment. The Presiding Officer enables the Ballot Unit.', bg: 'linear-gradient(135deg, #92400E, #F59E0B)' },
+  [PHASES.SELECT_CANDIDATE]: { emoji: '🔘', title: 'Cast Your Vote', desc: 'Press the blue button next to your chosen candidate. A red LED light will flash.', bg: 'linear-gradient(135deg, #0F172A, #334155)' },
+  [PHASES.CONFIRM_VOTE]: { emoji: '❓', title: 'Confirm Your Choice', desc: 'Carefully confirm your selection before locking it into the machine.', bg: 'linear-gradient(135deg, #1E1B4B, #6366F1)' },
+  [PHASES.VVPAT_SLIP]: { emoji: '🖨️', title: 'VVPAT Verification', desc: 'Look at the glass window! A paper slip drops into the sealed box, verifying what you just pressed.', bg: 'linear-gradient(135deg, #022C22, #059669)' },
+  [PHASES.VOTE_CAST]: { emoji: '✅', title: 'Vote Successfully Cast', desc: 'A long beep sounds. Your democratic duty is done securely and anonymously.', bg: 'linear-gradient(135deg, #1D4ED8, #60A5FA)' },
+  [PHASES.CELEBRATION]: { emoji: '🎉', title: 'Congratulations!', desc: 'You\'ve completed the simulation. You\'re now an informed voter!', bg: 'linear-gradient(135deg, #0D3E96, #2563EB)' },
 };
 
 const initialState = { phase: PHASES.IDLE, selectedCandidate: null, vvpatSeconds: 7, disclaimer: true };
@@ -87,7 +87,7 @@ export default function VotingSimulator() {
       <div style={{ maxWidth: 640, margin: '2rem auto', padding: '1rem', textAlign: 'center' }}>
         <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} style={{ background: 'white', borderRadius: '32px', overflow: 'hidden', boxShadow: '0 25px 50px -12px rgba(0,0,0,0.15)', border: '1px solid #E2E8F0' }}>
           <div style={{ background: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"), linear-gradient(135deg, #1E1B4B, #312E81)', padding: '3rem 2rem', color: 'white' }}>
-            <div style={{ fontSize: '4rem', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.3))', marginBottom: '1rem' }}>ðŸ›¡ï¸</div>
+            <div style={{ fontSize: '4rem', filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.3))', marginBottom: '1rem' }}>🛡️</div>
             <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 900, margin: 0 }}>Secure Sandbox Protocol</h2>
           </div>
           <div style={{ padding: '3rem 2rem' }}>
@@ -116,7 +116,7 @@ export default function VotingSimulator() {
         <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} style={{ background: 'white', borderRadius: '32px', overflow: 'hidden', boxShadow: '0 25px 50px rgba(0,0,0,0.1)', border: '1px solid #E2E8F0' }}>
           <div style={{ background: 'linear-gradient(135deg, #0D3E96, #2563EB)', padding: '4rem 2rem', color: 'white', position: 'relative' }}>
             <div style={{ position: 'absolute', inset: -20, background: 'radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%)' }}></div>
-            <div style={{ fontSize: '5rem', position: 'relative', zIndex: 1, textShadow: '0 10px 20px rgba(0,0,0,0.3)' }}>ðŸ—³ï¸</div>
+            <div style={{ fontSize: '5rem', position: 'relative', zIndex: 1, textShadow: '0 10px 20px rgba(0,0,0,0.3)' }}>🗳️</div>
             <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', fontWeight: 900, marginTop: '2rem', textShadow: '0 2px 4px rgba(0,0,0,0.1)', position: 'relative', zIndex: 1 }}>Digital EVM Simulator</h2>
           </div>
           <div style={{ padding: '3rem 2rem' }}>
@@ -130,7 +130,7 @@ export default function VotingSimulator() {
               onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
             >
               <span>Step Into Virtual Booth</span>
-              <span style={{ fontSize: '1.2rem' }}>â†’</span>
+              <span style={{ fontSize: '1.2rem' }}>→</span>
             </button>
           </div>
         </motion.div>
@@ -173,7 +173,7 @@ export default function VotingSimulator() {
       {/* Top Progress HUD */}
       <div style={{ background: 'white', padding: '1rem 1.5rem', borderRadius: '24px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)', border: '1px solid #E2E8F0', marginBottom: '2.5rem', display: 'flex', alignItems: 'center', gap: '1.5rem', flexWrap: 'wrap' }}>
         <div style={{ width: 45, height: 45, borderRadius: '14px', background: '#F8FAFF', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem', border: '1px solid #E2E8F0', flexShrink: 0 }}>
-          â³
+          ⏳
         </div>
         <div style={{ flex: 1, minWidth: '200px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
@@ -235,7 +235,7 @@ export default function VotingSimulator() {
                      
                      <div style={{ padding: '0 clamp(0.5rem, 2vw, 1.5rem)', borderLeft: '2px solid #E2E8F0', display: 'flex', alignItems: 'center', gap: 'clamp(0.5rem, 3vw, 1.5rem)' }}>
                        {/* Arrow indicator (braille mockup) */}
-                       <div style={{ fontSize: '1rem', color: '#94A3B8', fontWeight: 900, display: 'none', md: { display: 'block' } }}>â†’</div>
+                       <div style={{ fontSize: '1rem', color: '#94A3B8', fontWeight: 900, display: 'none', md: { display: 'block' } }}>→</div>
                        {/* Red LED */}
                        <div className="evm-led" />
                        {/* Physical Button */}
@@ -251,7 +251,7 @@ export default function VotingSimulator() {
              </div>
           ) : state.phase === PHASES.CONFIRM_VOTE ? (
              <div style={{ background: 'white', padding: 'clamp(2rem, 5vw, 4rem) clamp(1.5rem, 3vw, 3rem)', borderRadius: '32px', boxShadow: '0 25px 50px rgba(0,0,0,0.1)', textAlign: 'center', border: '1px solid #E2E8F0' }}>
-               <div style={{ background: '#EFF6FF', width: 90, height: 90, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', fontSize: '3rem', border: '8px solid #F8FAFF' }}>ðŸ”</div>
+               <div style={{ background: '#EFF6FF', width: 90, height: 90, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', fontSize: '3rem', border: '8px solid #F8FAFF' }}>🔍</div>
                <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2rem', color: '#1E293B', fontWeight: 900, marginBottom: '2rem' }}>Audit Your Selection</h2>
                
                <div style={{ display: 'inline-block', background: 'white', border: '1px solid #E2E8F0', borderRadius: '24px', padding: '2.5rem 3.5rem', marginBottom: '2.5rem', boxShadow: '0 20px 40px -10px rgba(0,0,0,0.05)' }}>
@@ -261,8 +261,8 @@ export default function VotingSimulator() {
                </div>
 
                <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-                 <button onClick={() => dispatch({ type: 'BACK_TO_EVM' })} style={{ padding: '1.25rem 2rem', background: '#F8FAFF', border: '1px solid #E2E8F0', borderRadius: '16px', cursor: 'pointer', fontWeight: 800, color: '#64748B', fontSize: '1rem', transition: 'all 0.2s', width: '100%', maxWidth: '250px' }} onMouseEnter={e => { e.currentTarget.style.background='#F1F5F9'; e.currentTarget.style.color='#1E293B' }} onMouseLeave={e => { e.currentTarget.style.background='#F8FAFF'; e.currentTarget.style.color='#64748B' }}>â† Retract Selection</button>
-                 <button onClick={() => dispatch({ type: 'CONFIRM' })} style={{ padding: '1.25rem 2rem', background: '#10B981', border: 'none', borderRadius: '16px', color: 'white', fontWeight: 800, cursor: 'pointer', boxShadow: '0 10px 20px rgba(16,185,129,0.2)', fontSize: '1rem', transition: 'transform 0.2s', width: '100%', maxWidth: '250px' }} onMouseEnter={e => e.currentTarget.style.transform='translateY(-2px)'} onMouseLeave={e => e.currentTarget.style.transform='translateY(0)'}>âœ“ Lock Choice to EVM</button>
+                 <button onClick={() => dispatch({ type: 'BACK_TO_EVM' })} style={{ padding: '1.25rem 2rem', background: '#F8FAFF', border: '1px solid #E2E8F0', borderRadius: '16px', cursor: 'pointer', fontWeight: 800, color: '#64748B', fontSize: '1rem', transition: 'all 0.2s', width: '100%', maxWidth: '250px' }} onMouseEnter={e => { e.currentTarget.style.background='#F1F5F9'; e.currentTarget.style.color='#1E293B' }} onMouseLeave={e => { e.currentTarget.style.background='#F8FAFF'; e.currentTarget.style.color='#64748B' }}>← Retract Selection</button>
+                 <button onClick={() => dispatch({ type: 'CONFIRM' })} style={{ padding: '1.25rem 2rem', background: '#10B981', border: 'none', borderRadius: '16px', color: 'white', fontWeight: 800, cursor: 'pointer', boxShadow: '0 10px 20px rgba(16,185,129,0.2)', fontSize: '1rem', transition: 'transform 0.2s', width: '100%', maxWidth: '250px' }} onMouseEnter={e => e.currentTarget.style.transform='translateY(-2px)'} onMouseLeave={e => e.currentTarget.style.transform='translateY(0)'}>✓ Lock Choice to EVM</button>
                </div>
              </div>
           ) : state.phase === PHASES.VVPAT_SLIP ? (
@@ -296,16 +296,16 @@ export default function VotingSimulator() {
              </div>
           ) : state.phase === PHASES.CELEBRATION ? (
              <div style={{ background: 'white', padding: '4rem 2rem', borderRadius: '32px', boxShadow: '0 25px 50px rgba(0,0,0,0.1)', textAlign: 'center', border: '1px solid #E2E8F0' }}>
-               <div style={{ fontSize: '5rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 10px 10px rgba(0,0,0,0.1))' }}>ðŸŽ‰</div>
+               <div style={{ fontSize: '5rem', marginBottom: '1.5rem', filter: 'drop-shadow(0 10px 10px rgba(0,0,0,0.1))' }}>🎉</div>
                <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '2.5rem', fontWeight: 900, color: '#0D3E96', letterSpacing: '-0.02em', marginBottom: '1rem' }}>Simulation Successful</h2>
                <p style={{ color: '#475569', fontSize: '1.15rem', maxWidth: 550, margin: '0 auto 3rem', lineHeight: 1.7 }}>You executed the 8-phase protocol perfectly. Your private vote was securely registered in the Control Unit. You are exceptionally prepared for democracy!</p>
                
                <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                  <button onClick={() => dispatch({ type: 'RESET' })} style={{ padding: '1.25rem 2.5rem', background: '#F1F5F9', color: '#1E293B', border: 'none', borderRadius: '16px', fontWeight: 800, fontSize: '1.05rem', cursor: 'pointer', transition: 'all 0.2s', width: '100%', maxWidth: '240px' }} onMouseEnter={e=>e.currentTarget.style.background='#E2E8F0'} onMouseLeave={e=>e.currentTarget.style.background='#F1F5F9'}>
-                   ðŸ”„ Reboot Simulator
+                   🔄 Reboot Simulator
                  </button>
                  <a href="/quiz" style={{ textDecoration: 'none', padding: '1.25rem 2.5rem', background: '#2563EB', color: 'white', borderRadius: '16px', fontWeight: 800, fontSize: '1.05rem', boxShadow: '0 10px 20px rgba(37,99,235,0.3)', width: '100%', maxWidth: '240px' }}>
-                   Take Civics Quiz âž”
+                   Take Civics Quiz ➔
                  </a>
                </div>
              </div>
@@ -328,7 +328,7 @@ export default function VotingSimulator() {
                    onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
                    onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
                  >
-                   Proceed Formally <span>â†’</span>
+                   Proceed Formally <span>→</span>
                  </button>
                </div>
              </div>

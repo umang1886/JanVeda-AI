@@ -37,7 +37,7 @@ function TypingDots() {
   return (
     <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px', padding: '0.25rem 0', marginBottom: '1.5rem' }}>
       <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'linear-gradient(135deg, #2563EB, #3B82F6)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 10px rgba(37,99,235,0.3)', border: '1px solid rgba(255,255,255,0.2)', fontSize: '0.9rem' }}>
-        ðŸ¤–
+        🤖
       </div>
       <div style={{ background: 'rgba(255,255,255,0.9)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.5)', borderRadius: '16px 16px 16px 4px', padding: '0.8rem 1rem', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
         <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
@@ -65,7 +65,7 @@ function MessageBubble({ msg, onChipClick }) {
     >
       {isBot && (
         <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'linear-gradient(135deg, #2563EB, #3B82F6)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 10px rgba(37,99,235,0.3)', border: '1px solid rgba(255,255,255,0.2)', fontSize: '0.9rem', alignSelf: 'flex-end' }}>
-          ðŸ¤–
+          🤖
         </div>
       )}
 
@@ -124,7 +124,7 @@ function MessageBubble({ msg, onChipClick }) {
 
       {!isBot && (
         <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'linear-gradient(135deg, #FF6600, #FF8C42)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, boxShadow: '0 4px 10px rgba(255,102,0,0.3)', border: '1px solid rgba(255,255,255,0.2)', fontSize: '0.9rem', alignSelf: 'flex-end' }}>
-          ðŸ‘¤
+          👤
         </div>
       )}
     </motion.div>
@@ -309,7 +309,7 @@ export default function Chatbot() {
         <div className="cb-header">
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <div style={{ position: 'relative' }}>
-               <div className="cb-header-ava" style={{ borderRadius: '50%', background: 'linear-gradient(135deg, #2563EB, #3B82F6)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 10px rgba(37,99,235,0.3)', border: '2px solid rgba(255,255,255,0.4)' }}>ðŸ¤–</div>
+               <div className="cb-header-ava" style={{ borderRadius: '50%', background: 'linear-gradient(135deg, #2563EB, #3B82F6)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 10px rgba(37,99,235,0.3)', border: '2px solid rgba(255,255,255,0.4)' }}>🤖</div>
                <span style={{ position: 'absolute', bottom: 0, right: 0, width: 12, height: 12, borderRadius: '50%', background: '#10B981', border: '2px solid white', boxShadow: '0 0 8px #10B981' }} />
             </div>
             <div>
@@ -318,8 +318,8 @@ export default function Chatbot() {
             </div>
           </div>
           <div style={{ display: 'flex', gap: '0.5rem' }}>
-            {state.messages.length > 0 && <button onClick={() => { const text = state.messages.map(m => `${m.role === 'user' ? 'You' : 'JanVeda AI'}: ${m.text}`).join('\n\n'); navigator.clipboard.writeText(text).then(() => alert('Copied!')); }} style={{ width: 36, height: 36, borderRadius: '50%', background: 'white', border: '1px solid rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 2px 6px rgba(0,0,0,0.05)', fontSize: '0.8rem' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}>ðŸ“‹</button>}
-            <button onClick={() => dispatch({ type: 'CLEAR' })} style={{ width: 36, height: 36, borderRadius: '50%', background: 'white', border: '1px solid rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 2px 6px rgba(0,0,0,0.05)', fontSize: '0.8rem' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}>ðŸ—‘ï¸</button>
+            {state.messages.length > 0 && <button onClick={() => { const text = state.messages.map(m => `${m.role === 'user' ? 'You' : 'JanVeda AI'}: ${m.text}`).join('\n\n'); navigator.clipboard.writeText(text).then(() => alert('Copied!')); }} style={{ width: 36, height: 36, borderRadius: '50%', background: 'white', border: '1px solid rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 2px 6px rgba(0,0,0,0.05)', fontSize: '0.8rem' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}>📋</button>}
+            <button onClick={() => dispatch({ type: 'CLEAR' })} style={{ width: 36, height: 36, borderRadius: '50%', background: 'white', border: '1px solid rgba(0,0,0,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', transition: 'all 0.2s', boxShadow: '0 2px 6px rgba(0,0,0,0.05)', fontSize: '0.8rem' }} onMouseOver={e=>e.currentTarget.style.transform='translateY(-2px)'} onMouseOut={e=>e.currentTarget.style.transform='translateY(0)'}>🗑️</button>
           </div>
         </div>
 
@@ -327,7 +327,7 @@ export default function Chatbot() {
         <div className="chat-scroll-area" style={{ flex: 1, overflowY: 'auto', padding: 'clamp(1rem, 3vw, 2rem)', display: 'flex', flexDirection: 'column' }}>
           {state.messages.length === 0 && (
             <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center' }}>
-              <div style={{ width: 70, height: 70, borderRadius: '50%', background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', marginBottom: '1rem', boxShadow: '0 15px 30px rgba(0,0,0,0.08)', border: '1px solid rgba(255,255,255,0.8)' }}>ðŸ‘‹</div>
+              <div style={{ width: 70, height: 70, borderRadius: '50%', background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '2.5rem', marginBottom: '1rem', boxShadow: '0 15px 30px rgba(0,0,0,0.08)', border: '1px solid rgba(255,255,255,0.8)' }}>👋</div>
               <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.4rem, 4vw, 1.8rem)', fontWeight: 900, color: '#1E293B', marginBottom: '0.5rem', background: 'linear-gradient(135deg, #0F172A, #3B82F6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{t('chatbot_title')}</h2>
               <p style={{ color: '#64748B', fontSize: 'clamp(0.9rem, 2.5vw, 1rem)', maxWidth: '400px', lineHeight: 1.6, marginBottom: '2rem', padding: '0 1rem' }} dangerouslySetInnerHTML={{ __html: t('chatbot_desc') }} />
               
@@ -360,7 +360,7 @@ export default function Chatbot() {
               onClick={handleVoice}
               style={{ width: 44, height: 44, borderRadius: '50%', background: isRecording ? '#FEE2E2' : '#F8FAFF', color: isRecording ? '#EF4444' : '#64748B', border: '1px solid rgba(0,0,0,0.02)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.1rem', flexShrink: 0, transition: 'all 0.2s' }}
             >
-              {isRecording ? <motion.span animate={{ scale:[1,1.2,1], opacity:[1,0.5,1] }} transition={{ repeat: Infinity }}>ðŸŽ™ï¸</motion.span> : 'ðŸŽ¤'}
+              {isRecording ? <motion.span animate={{ scale:[1,1.2,1], opacity:[1,0.5,1] }} transition={{ repeat: Infinity }}>🎙️</motion.span> : '🎤'}
             </button>
             
             <input
@@ -374,7 +374,7 @@ export default function Chatbot() {
               disabled={!input.trim()}
               style={{ width: 44, height: 44, borderRadius: '50%', background: input.trim() ? 'linear-gradient(135deg, #2563EB, #3B82F6)' : '#F1F5F9', color: input.trim() ? 'white' : '#94A3B8', border: 'none', cursor: input.trim() ? 'pointer' : 'not-allowed', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', flexShrink: 0, transition: 'all 0.2s', boxShadow: input.trim() ? '0 4px 10px rgba(37,99,235,0.3)' : 'none', paddingLeft: input.trim() ? '3px' : '0' }}
             >
-              âž¤
+              ➤
             </button>
           </div>
         </div>
